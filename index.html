@@ -1,295 +1,55 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-<meta charset="UTF-8" />
-<meta name="viewport" content="width=device-width, initial-scale=1" />
-<title>Maquillaje Certificado - Cuida tu piel</title>
-<!-- Leaflet CSS para mapa -->
-<link
-  rel="stylesheet"
-  href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"
-  integrity="sha256-sA+Gr3JbZjG2Pgr+6rQ3q+v2nC4/HJbNW3LcP3r7o3w="
-  crossorigin=""
-/>
-<style>
-  body {
-    margin: 0;
-    font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
-    background: #f3e5f8; /* morado pastel claro */
-    color: #4b235a;
-  }
-  header {
-    background: #b58bd9;
-    color: white;
-    padding: 1rem;
-    text-align: center;
-  }
-  nav {
-    background: #9b67c1;
-    display: flex;
-    justify-content: center;
-    gap: 1rem;
-    padding: 0.5rem;
-  }
-  nav button {
-    background: #8a4ecb;
-    border: none;
-    padding: 0.6rem 1.2rem;
-    border-radius: 6px;
-    color: white;
-    cursor: pointer;
-    font-weight: 600;
-  }
-  nav button:hover,
-  nav button.active {
-    background: #702ea9;
-  }
-  main {
-    padding: 1rem 1.5rem;
-    max-width: 900px;
-    margin: auto;
-  }
-  section {
-    display: none;
-  }
-  section.active {
-    display: block;
-  }
-  h2 {
-    border-bottom: 2px solid #7c3fb1;
-    padding-bottom: 0.3rem;
-    margin-bottom: 1rem;
-  }
-  iframe {
-    width: 100%;
-    max-width: 560px;
-    height: 315px;
-    border: none;
-    margin-bottom: 1rem;
-    border-radius: 12px;
-  }
-  ul.tips-list {
-    list-style-type: disc;
-    margin-left: 1.5rem;
-  }
-  ul.tips-list li {
-    margin-bottom: 0.6rem;
-  }
-  #map {
-    height: 400px;
-    border-radius: 12px;
-    margin-top: 1rem;
-  }
-  .store-card {
-    background: white;
-    margin: 0.8rem 0;
-    padding: 1rem;
-    border-radius: 10px;
-    box-shadow: 0 3px 6px rgba(109, 39, 140, 0.3);
-  }
-  .store-name {
-    font-weight: 700;
-    font-size: 1.1rem;
-    margin-bottom: 0.2rem;
-  }
-  .store-info {
-    font-size: 0.9rem;
-    color: #5a2a7b;
-  }
-  .filter-group {
-    margin-bottom: 1rem;
-  }
-  select {
-    padding: 0.5rem;
-    border-radius: 6px;
-    border: 1px solid #7c3fb1;
-    font-size: 1rem;
-  }
-</style>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Maquillaje Certificado</title>
+  <link rel="stylesheet" href="style.css" />
+  <script src="script.js" defer></script>
+  <script src="https://maps.googleapis.com/maps/api/js?key=TU_API_KEY&callback=initMap" async defer></script>
 </head>
 <body>
+  <header>
+    <h1>💄 Maquillaje Certificado para Ti</h1>
+    <p>Belleza segura, recomendada por expertos</p>
+  </header>
 
-<header>
-  <h1>Cuida tu piel con maquillaje certificado</h1>
-  <p>Información, consejos y tiendas cercanas para un maquillaje seguro</p>
-</header>
-
-<nav>
-  <button class="active" data-section="testimonios">Testimonios Reales</button>
-  <button data-section="dermatologos">Recomendaciones de Dermatólogos</button>
-  <button data-section="tips">Tips de Maquillaje</button>
-  <button data-section="mapa">Tiendas Cercanas</button>
-</nav>
-
-<main>
-  <!-- Sección Testimonios -->
-  <section id="testimonios" class="active">
-    <h2>Testimonios Reales</h2>
-    <iframe
-      src="https://www.youtube.com/embed/0K6a0ZfXpb8"
-      allowfullscreen
-      title="Testimonio 1"
-    ></iframe>
-    <iframe
-      src="https://www.youtube.com/embed/4z0OV8jKhqA"
-      allowfullscreen
-      title="Testimonio 2"
-    ></iframe>
+  <section id="testimonios">
+    <h2>🌟 Testimonios Reales</h2>
+    <div class="card">
+      <p>"Desde que uso maquillaje certificado, mi piel luce más saludable y radiante." – Ana G.</p>
+    </div>
+    <div class="card">
+      <p>"Me encanta saber que lo que uso está aprobado por dermatólogos." – Carla M.</p>
+    </div>
   </section>
 
-  <!-- Sección Dermatólogos -->
-  <section id="dermatologos">
-    <h2>Recomendaciones de Dermatólogos</h2>
-    <iframe
-      src="https://www.youtube.com/embed/wQ7WjMuUQ9M"
-      allowfullscreen
-      title="Dermatólogo 1"
-    ></iframe>
-    <iframe
-      src="https://www.youtube.com/embed/51Y5t3GzK4M"
-      allowfullscreen
-      title="Dermatólogo 2"
-    ></iframe>
-  </section>
-
-  <!-- Sección Tips -->
-  <section id="tips">
-    <h2>Tips de Maquillaje</h2>
-    <ul class="tips-list">
-      <li>Usa brochas y esponjas limpias para evitar irritaciones.</li>
-      <li>Revisa siempre que el maquillaje esté certificado y dentro de su fecha de caducidad.</li>
-      <li>Aplica protector solar incluso cuando uses maquillaje.</li>
-      <li>Realiza una prueba de alergia antes de usar un producto nuevo.</li>
-      <li>Desmaquíllate antes de dormir para cuidar tu piel.</li>
+  <section id="recomendaciones">
+    <h2>🩺 Recomendaciones de Dermatólogos</h2>
+    <ul>
+      <li>Evita productos con parabenos y fragancias artificiales.</li>
+      <li>Busca maquillaje con certificación hipoalergénica.</li>
+      <li>Consulta tu tipo de piel antes de comprar.</li>
     </ul>
   </section>
 
-  <!-- Sección Mapa -->
-  <section id="mapa">
-    <h2>Tiendas con Maquillaje Certificado Cerca de Ti</h2>
-
-    <div class="filter-group">
-      <label for="skinType">Filtra por tipo de piel: </label>
-      <select id="skinType">
-        <option value="all">Todos</option>
-        <option value="seca">Piel Seca</option>
-        <option value="grasa">Piel Grasa</option>
-        <option value="mixta">Piel Mixta</option>
-      </select>
-    </div>
-
-    <div id="map"></div>
-
-    <div id="storesList"></div>
+  <section id="tips">
+    <h2>💡 Tips de Maquillaje</h2>
+    <ul>
+      <li>Usa primer para una base más duradera.</li>
+      <li>Maquillaje mineral es ideal para piel sensible.</li>
+      <li>Aplica iluminador en puntos clave para resaltar tu rostro.</li>
+    </ul>
   </section>
-</main>
 
-<!-- Leaflet JS para mapa -->
-<script
-  src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"
-  integrity="sha256-o9N1j7vJ0cu8CdHIO0VNVKkG0RQja/rsR5KkPvyc9uY="
-  crossorigin=""
-></script>
+  <section id="mapa">
+    <h2>🗺️ Tiendas con Maquillaje Certificado</h2>
+    <div id="map"></div>
+    <div id="info-tiendas"></div>
+  </section>
 
-<script>
-  // Navegación entre secciones
-  const buttons = document.querySelectorAll("nav button");
-  const sections = document.querySelectorAll("main section");
-
-  buttons.forEach((btn) =>
-    btn.addEventListener("click", () => {
-      buttons.forEach((b) => b.classList.remove("active"));
-      btn.classList.add("active");
-      const target = btn.dataset.section;
-      sections.forEach((sec) =>
-        sec.id === target ? sec.classList.add("active") : sec.classList.remove("active")
-      );
-      if(target === "mapa"){
-        setTimeout(() => {
-          map.invalidateSize();
-        }, 300);
-      }
-    })
-  );
-
-  // Datos tiendas con maquillaje certificado
-  const stores = [
-    {
-      name: "Tienda Belleza Quito",
-      coords: [-0.180653, -78.467838],
-      price: "$25 - $50",
-      skinTypes: ["seca", "mixta"],
-      address: "Av. Amazonas 1234, Quito",
-    },
-    {
-      name: "Makeup Store Guayaquil",
-      coords: [-2.189412, -79.889069],
-      price: "$20 - $45",
-      skinTypes: ["grasa", "mixta"],
-      address: "Malecón 100, Guayaquil",
-    },
-    {
-      name: "Cosméticos La Bella",
-      coords: [-1.831239, -78.183406],
-      price: "$15 - $40",
-      skinTypes: ["seca", "grasa", "mixta"],
-      address: "Calle 10, Cuenca",
-    },
-  ];
-
-  // Inicializar mapa centrado en Ecuador
-  const map = L.map("map").setView([-1.5, -78.5], 6);
-
-  L.tileLayer("https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png", {
-    maxZoom: 18,
-    attribution:
-      '© <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors',
-  }).addTo(map);
-
-  let markers = [];
-
-  function updateStores(filterSkin) {
-    // Limpiar marcadores previos
-    markers.forEach((m) => map.removeLayer(m));
-    markers = [];
-
-    const filteredStores =
-      filterSkin && filterSkin !== "all"
-        ? stores.filter((store) => store.skinTypes.includes(filterSkin))
-        : stores;
-
-    // Actualizar lista de tiendas HTML
-    const listDiv = document.getElementById("storesList");
-    listDiv.innerHTML = "";
-
-    filteredStores.forEach((store) => {
-      const marker = L.marker(store.coords).addTo(map);
-      marker.bindPopup(
-        `<b>${store.name}</b><br>${store.address}<br>Precio: ${store.price}<br>Tipo de piel: ${store.skinTypes.join(", ")}`
-      );
-      markers.push(marker);
-
-      const div = document.createElement("div");
-      div.className = "store-card";
-      div.innerHTML = `<div class="store-name">${store.name}</div>
-        <div class="store-info">${store.address}</div>
-        <div class="store-info">Precio: ${store.price}</div>
-        <div class="store-info">Tipo de piel: ${store.skinTypes.join(", ")}</div>`;
-      listDiv.appendChild(div);
-    });
-
-    if(filteredStores.length > 0){
-      map.setView(filteredStores[0].coords, 12);
-    }
-  }
-
-  // Mostrar todas las tiendas al iniciar
-  updateStores("all");
-
-  // Evento para filtrar por tipo de piel
-  document.getElementById("skinType").addEventListener("change", (e) => {
-    updateStores(e.target.value);
-  });
-</script>
+  <footer>
+    <p>&copy; 2025 Maquillaje Certificado. Belleza con confianza.</p>
+  </footer>
 </body>
 </html>
