@@ -1,55 +1,344 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Maquillaje Certificado</title>
-  <link rel="stylesheet" href="style.css" />
-  <script src="script.js" defer></script>
-  <script src="https://maps.googleapis.com/maps/api/js?key=TU_API_KEY&callback=initMap" async defer></script>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Maquillaje Certificado - Cuida tu piel</title>
+<!-- Leaflet CSS para mapa -->
+<link
+  rel="stylesheet"
+  href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"
+  integrity="sha256-sA+Gr3JbZjG2Pgr+6rQ3q+v2nC4/HJbNW3LcP3r7o3w="
+  crossorigin=""
+/>
+<style>
+  body {
+    margin: 0;
+    font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+    background: #d4f0ef; /* turquesa pastel claro */
+    color: #0d474d;
+    line-height: 1.5;
+  }
+  header {
+    background: #57c4bc;
+    color: white;
+    padding: 1rem;
+    text-align: center;
+  }
+  nav {
+    background: #43b6af;
+    display: flex;
+    justify-content: center;
+    gap: 1rem;
+    padding: 0.5rem;
+    flex-wrap: wrap;
+  }
+  nav button {
+    background: #3aa79a;
+    border: none;
+    padding: 0.6rem 1.2rem;
+    border-radius: 6px;
+    color: white;
+    cursor: pointer;
+    font-weight: 600;
+    transition: background-color 0.3s ease;
+  }
+  nav button:hover,
+  nav button.active {
+    background: #2a7a74;
+  }
+  main {
+    padding: 1rem 1.5rem;
+    max-width: 900px;
+    margin: auto;
+  }
+  section {
+    display: none;
+  }
+  section.active {
+    display: block;
+  }
+  h2 {
+    border-bottom: 2px solid #3aa79a;
+    padding-bottom: 0.3rem;
+    margin-bottom: 1rem;
+  }
+  .testimonial, .dermatologist, .tip {
+    background: white;
+    border-radius: 10px;
+    padding: 1rem 1.2rem;
+    margin-bottom: 1rem;
+    box-shadow: 0 2px 5px rgba(26, 133, 128, 0.3);
+  }
+  .testimonial h3, .dermatologist h3, .tip h3 {
+    color: #1b534f;
+    margin-bottom: 0.3rem;
+  }
+  .testimonial p, .dermatologist p, .tip p {
+    font-size: 0.95rem;
+    color: #2f5c5a;
+  }
+  ul.tips-list {
+    list-style-type: disc;
+    margin-left: 1.5rem;
+  }
+  ul.tips-list li {
+    margin-bottom: 0.6rem;
+  }
+  #map {
+    height: 400px;
+    border-radius: 12px;
+    margin-top: 1rem;
+  }
+  .store-card {
+    background: white;
+    margin: 0.8rem 0;
+    padding: 1rem;
+    border-radius: 10px;
+    box-shadow: 0 3px 6px rgba(26, 133, 128, 0.3);
+  }
+  .store-name {
+    font-weight: 700;
+    font-size: 1.1rem;
+    margin-bottom: 0.2rem;
+    color: #0d474d;
+  }
+  .store-info {
+    font-size: 0.9rem;
+    color: #1a8580;
+  }
+  .filter-group {
+    margin-bottom: 1rem;
+  }
+  select {
+    padding: 0.5rem;
+    border-radius: 6px;
+    border: 1px solid #3aa79a;
+    font-size: 1rem;
+  }
+</style>
 </head>
 <body>
-  <header>
-    <h1>💄 Maquillaje Certificado para Ti</h1>
-    <p>Belleza segura, recomendada por expertos</p>
-  </header>
 
-  <section id="testimonios">
-    <h2>🌟 Testimonios Reales</h2>
-    <div class="card">
-      <p>"Desde que uso maquillaje certificado, mi piel luce más saludable y radiante." – Ana G.</p>
-    </div>
-    <div class="card">
-      <p>"Me encanta saber que lo que uso está aprobado por dermatólogos." – Carla M.</p>
-    </div>
+<header>
+  <h1>Cuida tu piel con maquillaje certificado</h1>
+  <p>Información, consejos y tiendas cercanas para un maquillaje seguro</p>
+</header>
+
+<nav>
+  <button class="active" data-section="testimonios">Testimonios Reales</button>
+  <button data-section="dermatologos">Recomendaciones de Dermatólogos</button>
+  <button data-section="tips">Tips de Maquillaje</button>
+  <button data-section="mapa">Tiendas Cercanas</button>
+</nav>
+
+<main>
+  <!-- Sección Testimonios -->
+  <section id="testimonios" class="active">
+    <h2>Testimonios Reales</h2>
+    <article class="testimonial">
+      <h3>María, 28 años - Quito</h3>
+      <p>
+        “Antes usaba maquillaje sin saber si estaba certificado y tuve una reacción alérgica grave. Desde que cambio a productos certificados, mi piel mejoró muchísimo y no tengo más irritaciones.”
+      </p>
+    </article>
+    <article class="testimonial">
+      <h3>Lucía, 35 años - Guayaquil</h3>
+      <p>
+        “Aprendí que comprar maquillaje certificado protege mi salud y evita daños en la piel a largo plazo. Además, la calidad es mucho mejor y dura más tiempo.”
+      </p>
+    </article>
+    <article class="testimonial">
+      <h3>Verónica, 24 años - Cuenca</h3>
+      <p>
+        “Los testimonios de dermatólogos me convencieron de dejar de usar marcas no certificadas. Mi piel sensible ahora está protegida y me siento más segura.”
+      </p>
+    </article>
   </section>
 
-  <section id="recomendaciones">
-    <h2>🩺 Recomendaciones de Dermatólogos</h2>
-    <ul>
-      <li>Evita productos con parabenos y fragancias artificiales.</li>
-      <li>Busca maquillaje con certificación hipoalergénica.</li>
-      <li>Consulta tu tipo de piel antes de comprar.</li>
-    </ul>
+  <!-- Sección Dermatólogos -->
+  <section id="dermatologos">
+    <h2>Recomendaciones de Dermatólogos</h2>
+    <article class="dermatologist">
+      <h3>Dra. Andrea Paredes</h3>
+      <p>
+        “Es fundamental usar maquillaje con certificación sanitaria porque garantiza que los ingredientes son seguros, reducen el riesgo de alergias y previenen daños a la barrera cutánea.”
+      </p>
+    </article>
+    <article class="dermatologist">
+      <h3>Dr. Carlos Vega</h3>
+      <p>
+        “Los productos no certificados pueden contener sustancias tóxicas o contaminantes. Recomiendo siempre verificar el sello de certificación y optar por marcas reconocidas.”
+      </p>
+    </article>
+    <article class="dermatologist">
+      <h3>Dra. Mariana Solís</h3>
+      <p>
+        “Especialmente para pieles sensibles o con problemas dermatológicos, es vital usar maquillaje que respete el pH de la piel y tenga ingredientes hipoalergénicos certificados.”
+      </p>
+    </article>
   </section>
 
+  <!-- Sección Tips -->
   <section id="tips">
-    <h2>💡 Tips de Maquillaje</h2>
-    <ul>
-      <li>Usa primer para una base más duradera.</li>
-      <li>Maquillaje mineral es ideal para piel sensible.</li>
-      <li>Aplica iluminador en puntos clave para resaltar tu rostro.</li>
+    <h2>Tips de Maquillaje</h2>
+    <ul class="tips-list">
+      <li>Limpia tus brochas y esponjas regularmente para evitar acumulación de bacterias.</li>
+      <li>Elige productos con ingredientes naturales y certificados para minimizar riesgos.</li>
+      <li>Usa protector solar antes de aplicar maquillaje para proteger tu piel de rayos UV.</li>
+      <li>Haz pruebas de parche con nuevos productos antes de aplicarlos en todo el rostro.</li>
+      <li>Retira el maquillaje completamente antes de dormir para evitar obstrucción de poros.</li>
+      <li>Evita compartir maquillaje para prevenir infecciones.</li>
+      <li>Consulta siempre con un dermatólogo si tienes dudas sobre qué productos usar.</li>
     </ul>
   </section>
 
+  <!-- Sección Mapa -->
   <section id="mapa">
-    <h2>🗺️ Tiendas con Maquillaje Certificado</h2>
-    <div id="map"></div>
-    <div id="info-tiendas"></div>
-  </section>
+    <h2>Tiendas con Maquillaje Certificado Cerca de Ti</h2>
 
-  <footer>
-    <p>&copy; 2025 Maquillaje Certificado. Belleza con confianza.</p>
-  </footer>
+    <div class="filter-group">
+      <label for="skinType">Filtra por tipo de piel: </label>
+      <select id="skinType">
+        <option value="all">Todos</option>
+        <option value="seca">Piel Seca</option>
+        <option value="grasa">Piel Grasa</option>
+        <option value="mixta">Piel Mixta</option>
+      </select>
+    </div>
+
+    <div id="map"></div>
+
+    <div id="storesList"></div>
+  </section>
+</main>
+
+<!-- Leaflet JS para mapa -->
+<script
+  src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"
+  integrity="sha256-o9N1j7vJ0cu8CdHIO0VNVKkG0RQja/rsR5KkPvyc9uY="
+  crossorigin=""
+></script>
+
+<script>
+  // Navegación entre secciones
+  const buttons = document.querySelectorAll("nav button");
+  const sections = document.querySelectorAll("main section");
+
+  buttons.forEach((btn) =>
+    btn.addEventListener("click", () => {
+      buttons.forEach((b) => b.classList.remove("active"));
+      btn.classList.add("active");
+      const target = btn.dataset.section;
+      sections.forEach((sec) =>
+        sec.id === target ? sec.classList.add("active") : sec.classList.remove("active")
+      );
+      if(target === "mapa"){
+        setTimeout(() => {
+          map.invalidateSize();
+        }, 300);
+      }
+    })
+  );
+
+  // Datos tiendas con maquillaje certificado
+  const stores = [
+    {
+      name: "Tienda Belleza Quito",
+      coords: [-0.180653, -78.467838],
+      price: "$25 - $50",
+      skinTypes: ["seca", "mixta"],
+      address: "Av. Amazonas 1234, Quito",
+      description: "Amplia variedad de bases hidratantes y productos para piel seca y mixta.",
+    },
+    {
+      name: "Makeup Store Guayaquil",
+      coords: [-2.189412, -79.889069],
+      price: "$20 - $45",
+      skinTypes: ["grasa", "mixta"],
+      address: "Malecón 100, Guayaquil",
+      description: "Especialistas en maquillaje para piel grasa con fórmulas no comedogénicas.",
+    },
+    {
+      name: "Cosméticos La Bella",
+      coords: [-1.831239, -78.183406],
+      price: "$15 - $40",
+      skinTypes: ["seca", "grasa", "mixta"],
+      address: "Calle 10, Cuenca",
+      description: "Productos certificados para todo tipo de piel, con atención personalizada.",
+    },
+    {
+      name: "Salón y Tienda Glamour",
+      coords: [-0.203216, -78.491098],
+      price: "$30 - $60",
+      skinTypes: ["seca", "sensible"],
+      address: "Av. Colón 250, Quito",
+      description: "Cosméticos certificados para piel sensible y seca, con asesoría experta.",
+    },
+    {
+      name: "Estética Natural",
+      coords: [-2.147123, -79.900543],
+      price: "$18 - $35",
+      skinTypes: ["grasa", "mixta"],
+      address: "Calle Las Monjas 120, Guayaquil",
+      description: "Opciones orgánicas y certificadas para piel grasa y mixta.",
+    },
+  ];
+
+  // Inicializar mapa centrado en Ecuador
+  const map = L.map("map").setView([-1.5, -78.5], 6);
+
+  L.tileLayer("https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png", {
+    maxZoom: 18,
+    attribution:
+      '© <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors',
+  }).addTo(map);
+
+  let markers = [];
+
+  function updateStores(filterSkin) {
+    // Limpiar marcadores previos
+    markers.forEach((m) => map.removeLayer(m));
+    markers = [];
+
+    const filteredStores =
+      filterSkin && filterSkin !== "all"
+        ? stores.filter((store) => store.skinTypes.includes(filterSkin))
+        : stores;
+
+    // Actualizar lista de tiendas HTML
+    const listDiv = document.getElementById("storesList");
+    listDiv.innerHTML = "";
+
+    filteredStores.forEach((store) => {
+      const marker = L.marker(store.coords).addTo(map);
+      marker.bindPopup(
+        `<b>${store.name}</b><br>${store.address}<br>Precio: ${store.price}<br>Tipo de piel: ${store.skinTypes.join(", ")}<br><i>${store.description}</i>`
+      );
+      markers.push(marker);
+
+      const div = document.createElement("div");
+      div.className = "store-card";
+      div.innerHTML = `<div class="store-name">${store.name}</div>
+        <div class="store-info">${store.address}</div>
+        <div class="store-info"><strong>Precio:</strong> ${store.price}</div>
+        <div class="store-info"><strong>Tipo de piel:</strong> ${store.skinTypes.join(", ")}</div>
+        <div class="store-info"><em>${store.description}</em></div>`;
+      listDiv.appendChild(div);
+    });
+
+    if(filteredStores.length > 0){
+      map.setView(filteredStores[0].coords, 12);
+    }
+  }
+
+  // Mostrar todas las tiendas al iniciar
+  updateStores("all");
+
+  // Evento para filtrar por tipo de piel
+  document.getElementById("skinType").addEventListener("change", (e) => {
+    updateStores(e.target.value);
+  });
+</script>
 </body>
 </html>
