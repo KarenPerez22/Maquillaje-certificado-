@@ -327,8 +327,15 @@
       listDiv.appendChild(div);
     });
 
-    if(filteredStores.length > 0){
-      map.setView(filteredStores[0].coords, 12);
+    if (filteredStores.length > 0) {
+      // Centrar mapa en el promedio de las ubicaciones filtradas
+      const latSum = filteredStores.reduce((sum, s) => sum + s.coords[0], 0);
+      const lngSum = filteredStores.reduce((sum, s) => sum + s.coords[1], 0);
+      const center = [latSum / filteredStores.length, lngSum / filteredStores.length];
+      map.setView(center, 10);
+    } else {
+      // Si no hay tiendas filtradas, volver a vista general
+      map.setView([-1.5, -78.5], 6);
     }
   }
 
