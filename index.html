@@ -1,327 +1,295 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <title>Maquillaje Certificado - Mujeres</title>
-    <style>
-        /* Formato morado pastel */
-        :root {
-            --morado-pastel: #c3aed6;
-            --morado-oscuro: #7d5ba6;
-            --rosa-suave: #f2d7ee;
-            --gris-claro: #f7f5f9;
-            --texto-oscuro: #3a2c4f;
-        }
-        body {
-            margin: 0;
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            background-color: var(--gris-claro);
-            color: var(--texto-oscuro);
-            line-height: 1.6;
-        }
-        header {
-            background-color: var(--morado-pastel);
-            padding: 1rem 2rem;
-            text-align: center;
-            font-weight: bold;
-            font-size: 1.8rem;
-            color: var(--morado-oscuro);
-            box-shadow: 0 2px 8px rgb(125 91 166 / 0.3);
-        }
-        main {
-            max-width: 1000px;
-            margin: 2rem auto;
-            padding: 0 1rem;
-        }
-        section {
-            background: white;
-            border-radius: 12px;
-            padding: 1.5rem 2rem;
-            margin-bottom: 2.5rem;
-            box-shadow: 0 4px 10px rgb(125 91 166 / 0.1);
-        }
-        h2 {
-            color: var(--morado-oscuro);
-            border-bottom: 3px solid var(--rosa-suave);
-            padding-bottom: 0.3rem;
-            margin-bottom: 1rem;
-        }
-        /* Videos en galería */
-        .video-grid {
-            display: flex;
-            flex-wrap: wrap;
-            gap: 1rem;
-            justify-content: center;
-        }
-        .video-wrapper {
-            flex: 1 1 320px;
-            max-width: 480px;
-            border-radius: 8px;
-            overflow: hidden;
-            box-shadow: 0 3px 8px rgb(125 91 166 / 0.15);
-        }
-        .video-wrapper iframe {
-            width: 100%;
-            height: 270px;
-            border: none;
-        }
-        /* Tips de maquillaje */
-        .tips-list {
-            display: flex;
-            flex-direction: column;
-            gap: 1rem;
-        }
-        .tip {
-            background-color: var(--rosa-suave);
-            border-radius: 10px;
-            padding: 1rem 1.5rem;
-            font-size: 1rem;
-            color: var(--morado-oscuro);
-            box-shadow: 0 2px 6px rgb(125 91 166 / 0.2);
-        }
-        /* Mapa y lista tiendas */
-        #map {
-            width: 100%;
-            height: 400px;
-            border-radius: 12px;
-            margin-bottom: 1.5rem;
-            box-shadow: 0 3px 12px rgb(125 91 166 / 0.2);
-        }
-        .store-list {
-            max-height: 250px;
-            overflow-y: auto;
-            border-top: 1px solid var(--morado-pastel);
-            padding-top: 1rem;
-        }
-        .store-item {
-            background-color: var(--rosa-suave);
-            margin-bottom: 0.8rem;
-            border-radius: 8px;
-            padding: 0.8rem 1rem;
-            box-shadow: 0 1px 5px rgb(125 91 166 / 0.12);
-            cursor: pointer;
-            transition: background-color 0.3s ease;
-        }
-        .store-item:hover {
-            background-color: var(--morado-pastel);
-            color: white;
-        }
-        .store-title {
-            font-weight: 600;
-        }
-        .store-info {
-            font-size: 0.9rem;
-        }
-        /* Responsive */
-        @media (max-width: 600px) {
-            .video-wrapper {
-                flex: 1 1 100%;
-            }
-        }
-    </style>
-
-    <!-- Leaflet CSS para mapa -->
-    <link
-        rel="stylesheet"
-        href="https://unpkg.com/leaflet@1.9.3/dist/leaflet.css"
-        integrity="sha256-sA+e2amP63eG1Khf27UQK+7K/jVTh0wEvu+2Qm+6KZm0="
-        crossorigin=""
-    />
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Maquillaje Certificado - Cuida tu piel</title>
+<!-- Leaflet CSS para mapa -->
+<link
+  rel="stylesheet"
+  href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"
+  integrity="sha256-sA+Gr3JbZjG2Pgr+6rQ3q+v2nC4/HJbNW3LcP3r7o3w="
+  crossorigin=""
+/>
+<style>
+  body {
+    margin: 0;
+    font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+    background: #f3e5f8; /* morado pastel claro */
+    color: #4b235a;
+  }
+  header {
+    background: #b58bd9;
+    color: white;
+    padding: 1rem;
+    text-align: center;
+  }
+  nav {
+    background: #9b67c1;
+    display: flex;
+    justify-content: center;
+    gap: 1rem;
+    padding: 0.5rem;
+  }
+  nav button {
+    background: #8a4ecb;
+    border: none;
+    padding: 0.6rem 1.2rem;
+    border-radius: 6px;
+    color: white;
+    cursor: pointer;
+    font-weight: 600;
+  }
+  nav button:hover,
+  nav button.active {
+    background: #702ea9;
+  }
+  main {
+    padding: 1rem 1.5rem;
+    max-width: 900px;
+    margin: auto;
+  }
+  section {
+    display: none;
+  }
+  section.active {
+    display: block;
+  }
+  h2 {
+    border-bottom: 2px solid #7c3fb1;
+    padding-bottom: 0.3rem;
+    margin-bottom: 1rem;
+  }
+  iframe {
+    width: 100%;
+    max-width: 560px;
+    height: 315px;
+    border: none;
+    margin-bottom: 1rem;
+    border-radius: 12px;
+  }
+  ul.tips-list {
+    list-style-type: disc;
+    margin-left: 1.5rem;
+  }
+  ul.tips-list li {
+    margin-bottom: 0.6rem;
+  }
+  #map {
+    height: 400px;
+    border-radius: 12px;
+    margin-top: 1rem;
+  }
+  .store-card {
+    background: white;
+    margin: 0.8rem 0;
+    padding: 1rem;
+    border-radius: 10px;
+    box-shadow: 0 3px 6px rgba(109, 39, 140, 0.3);
+  }
+  .store-name {
+    font-weight: 700;
+    font-size: 1.1rem;
+    margin-bottom: 0.2rem;
+  }
+  .store-info {
+    font-size: 0.9rem;
+    color: #5a2a7b;
+  }
+  .filter-group {
+    margin-bottom: 1rem;
+  }
+  select {
+    padding: 0.5rem;
+    border-radius: 6px;
+    border: 1px solid #7c3fb1;
+    font-size: 1rem;
+  }
+</style>
 </head>
 <body>
-    <header>
-        Maquillaje Certificado: Testimonios, Consejos y Tiendas Cercanas
-    </header>
-    <main>
-        <!-- Sección: Videos de testimonios reales -->
-        <section id="testimonios">
-            <h2>Testimonios Reales sobre Maquillaje Certificado</h2>
-            <div class="video-grid">
-                <div class="video-wrapper">
-                    <iframe 
-                        src="https://youtu.be/97fIopIX4wo?si=zIs9Fxbks0xdC-5P" 
-                        title="Testimonio 1" 
-                        allowfullscreen 
-                        loading="lazy"></iframe>
-                </div>
-                <div class="video-wrapper">
-                    <iframe 
-                        src="https://youtu.be/2Ga3cOPRJ-U?si=5EBvpXBjpShyPgiA" 
-                        title="Testimonio 2" 
-                        allowfullscreen 
-                        loading="lazy"></iframe>
-                </div>
-                <div class="video-wrapper">
-                    <iframe 
-                        src="https://youtu.be/eopZbyOCDf0?si=OXvLf0ChjMYukNFL" 
-                        title="Testimonio 3" 
-                        allowfullscreen 
-                        loading="lazy"></iframe>
-                </div>
-            </div>
-        </section>
 
-        <!-- Sección: Videos de recomendaciones de dermatólogos -->
-        <section id="dermatologos">
-            <h2>Recomendaciones de Dermatólogos</h2>
-            <div class="video-grid">
-                <div class="video-wrapper">
-                    <iframe 
-                        src="https://youtu.be/tx-GKOEoqDw?si=Qgy8j8B2jd9avFsB" 
-                        title="Dermatólogo 1" 
-                        allowfullscreen 
-                        loading="lazy"></iframe>
-                </div>
-                <div class="video-wrapper">
-                    <iframe 
-                        src="https://youtu.be/S0-GQXi1JJM?si=LPz0h5H_xv5eRyEp" 
-                        title="Dermatólogo 2" 
-                        allowfullscreen 
-                        loading="lazy"></iframe>
-                </div>
-            </div>
-        </section>
+<header>
+  <h1>Cuida tu piel con maquillaje certificado</h1>
+  <p>Información, consejos y tiendas cercanas para un maquillaje seguro</p>
+</header>
 
-        <!-- Sección: Tips de maquillaje -->
-        <section id="tips">
-            <h2>Tips de Maquillaje</h2>
-            <div class="tips-list">
-                <div class="tip">
-                    <strong>Consejo para piel sensible:</strong> Usa bases hipoalergénicas y libres de aceites para evitar brotes.
-                </div>
-                <div class="tip">
-                    <strong>Maquillaje duradero:</strong> Aplica un primer o prebase para que el maquillaje se mantenga más tiempo intacto.
-                </div>
-                <div class="tip">
-                    <strong>Tip para conseguir un acabado natural:</strong> Usa esponjas húmedas para difuminar base y corrector uniformemente.
-                </div>
-                <div class="tip">
-                    <strong>Ingredientes recomendados:</strong> Prefiere productos certificados con ingredientes como aloe vera o vitamina E para cuidar tu piel.
-                </div>
-                <div class="tip">
-                    <strong>Rutina de limpieza:</strong> No olvides retirar el maquillaje cada noche para evitar irritaciones y mantener la piel sana.
-                </div>
-            </div>
-        </section>
+<nav>
+  <button class="active" data-section="testimonios">Testimonios Reales</button>
+  <button data-section="dermatologos">Recomendaciones de Dermatólogos</button>
+  <button data-section="tips">Tips de Maquillaje</button>
+  <button data-section="mapa">Tiendas Cercanas</button>
+</nav>
 
-        <!-- Sección: Mapa de tiendas con maquillaje certificado -->
-        <section id="tiendas">
-            <h2>Encuentra Tiendas con Maquillaje Certificado Cerca de Ti</h2>
-            <div id="map"></div>
-            <div class="store-list" id="store-list">
-                <!-- Lista dinámica de tiendas -->
-            </div>
-            <p style="font-size:0.85rem; color: var(--morado-oscuro); margin-top:1rem;">
-                Haz clic en una tienda para ver su ubicación en el mapa.
-            </p>
-        </section>
-    </main>
+<main>
+  <!-- Sección Testimonios -->
+  <section id="testimonios" class="active">
+    <h2>Testimonios Reales</h2>
+    <iframe
+      src="https://www.youtube.com/embed/0K6a0ZfXpb8"
+      allowfullscreen
+      title="Testimonio 1"
+    ></iframe>
+    <iframe
+      src="https://www.youtube.com/embed/4z0OV8jKhqA"
+      allowfullscreen
+      title="Testimonio 2"
+    ></iframe>
+  </section>
 
-    <!-- Leaflet JS para mapa -->
-    <script
-        src="https://unpkg.com/leaflet@1.9.3/dist/leaflet.js"
-        integrity="sha256-QVqQbriMqK+z2T4f5D+xv5EBur1bQHYvvgcHb9hOJSM="
-        crossorigin=""
-    ></script>
-    <script>
-        // Datos de ejemplo para tiendas con maquillaje certificado
-        // Cada tienda tiene: nombre, latitud, longitud, precio promedio, apto para tipos de piel
-        const tiendas = [
-            {
-                nombre: "Belleza Natural",
-                lat: -0.180653,
-                lon: -78.467838,
-                precio: "$15 - $40",
-                piel: ["sensible", "mixta", "grasa"],
-                direccion: "Av. Amazonas 123, Quito"
-            },
-            {
-                nombre: "Makeup Certificado",
-                lat: -0.189512,
-                lon: -78.492322,
-                precio: "$12 - $35",
-                piel: ["normal", "sensible"],
-                direccion: "Calle 10 de Agosto 456, Quito"
-            },
-            {
-                nombre: "Cosméticos Andinos",
-                lat: -2.897124,
-                lon: -79.004069,
-                precio: "$10 - $30",
-                piel: ["seca", "mixta"],
-                direccion: "Av. 24 de Mayo 867, Cuenca"
-            },
-            {
-                nombre: "Espacio de Belleza",
-                lat: -0.222222,
-                lon: -78.511111,
-                precio: "$20 - $50",
-                piel: ["grasa", "normal"],
-                direccion: "Plaza Foch, Quito"
-            }
-        ];
+  <!-- Sección Dermatólogos -->
+  <section id="dermatologos">
+    <h2>Recomendaciones de Dermatólogos</h2>
+    <iframe
+      src="https://www.youtube.com/embed/wQ7WjMuUQ9M"
+      allowfullscreen
+      title="Dermatólogo 1"
+    ></iframe>
+    <iframe
+      src="https://www.youtube.com/embed/51Y5t3GzK4M"
+      allowfullscreen
+      title="Dermatólogo 2"
+    ></iframe>
+  </section>
 
-        // Mapa Leaflet inicial
-        const map = L.map('map').setView([-0.180653, -78.467838], 12); // Centrado en Quito
+  <!-- Sección Tips -->
+  <section id="tips">
+    <h2>Tips de Maquillaje</h2>
+    <ul class="tips-list">
+      <li>Usa brochas y esponjas limpias para evitar irritaciones.</li>
+      <li>Revisa siempre que el maquillaje esté certificado y dentro de su fecha de caducidad.</li>
+      <li>Aplica protector solar incluso cuando uses maquillaje.</li>
+      <li>Realiza una prueba de alergia antes de usar un producto nuevo.</li>
+      <li>Desmaquíllate antes de dormir para cuidar tu piel.</li>
+    </ul>
+  </section>
 
-        L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
-            maxZoom: 19,
-            attribution: '&copy; OpenStreetMap contributors'
-        }).addTo(map);
+  <!-- Sección Mapa -->
+  <section id="mapa">
+    <h2>Tiendas con Maquillaje Certificado Cerca de Ti</h2>
 
-        // Marcadores dinámicos almacenados
-        const markers = [];
+    <div class="filter-group">
+      <label for="skinType">Filtra por tipo de piel: </label>
+      <select id="skinType">
+        <option value="all">Todos</option>
+        <option value="seca">Piel Seca</option>
+        <option value="grasa">Piel Grasa</option>
+        <option value="mixta">Piel Mixta</option>
+      </select>
+    </div>
 
-        // Función para agregar marcadores al mapa
-        function addMarkers() {
-            tiendas.forEach((tienda, i) => {
-                const marker = L.marker([tienda.lat, tienda.lon]).addTo(map);
-                marker.bindPopup(`
-                    <strong>${tienda.nombre}</strong><br/>
-                    Dirección: ${tienda.direccion}<br/>
-                    Precio promedio: ${tienda.precio}<br/>
-                    Apto para piel: ${tienda.piel.join(', ')}
-                `);
-                markers.push(marker);
-            });
-        }
+    <div id="map"></div>
 
-        // Cargar lista de tiendas en panel inferior
-        function loadTiendasList() {
-            const listContainer = document.getElementById('store-list');
-            listContainer.innerHTML = ''; // Limpiar
+    <div id="storesList"></div>
+  </section>
+</main>
 
-            tiendas.forEach((tienda, index) => {
-                const div = document.createElement('div');
-                div.className = 'store-item';
-                div.tabIndex = 0;
-                div.setAttribute('role', 'button');
-                div.setAttribute('aria-label', `Ir a la tienda ${tienda.nombre}`);
-                div.innerHTML = `
-                    <div class="store-title">${tienda.nombre}</div>
-                    <div class="store-info">
-                        Dirección: ${tienda.direccion}<br/>
-                        Precio promedio: ${tienda.precio}<br/>
-                        Apto para piel: ${tienda.piel.join(', ')}
-                    </div>
-                `;
-                div.addEventListener('click', () => {
-                    map.setView([tienda.lat, tienda.lon], 16);
-                    markers[index].openPopup();
-                });
-                div.addEventListener('keypress', (e) => {
-                    if (e.key === 'Enter' || e.key === ' ') {
-                        div.click();
-                    }
-                });
-                listContainer.appendChild(div);
-            });
-        }
+<!-- Leaflet JS para mapa -->
+<script
+  src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"
+  integrity="sha256-o9N1j7vJ0cu8CdHIO0VNVKkG0RQja/rsR5KkPvyc9uY="
+  crossorigin=""
+></script>
 
-        // Inicialización
-        addMarkers();
-        loadTiendasList();
-    </script>
+<script>
+  // Navegación entre secciones
+  const buttons = document.querySelectorAll("nav button");
+  const sections = document.querySelectorAll("main section");
+
+  buttons.forEach((btn) =>
+    btn.addEventListener("click", () => {
+      buttons.forEach((b) => b.classList.remove("active"));
+      btn.classList.add("active");
+      const target = btn.dataset.section;
+      sections.forEach((sec) =>
+        sec.id === target ? sec.classList.add("active") : sec.classList.remove("active")
+      );
+      if(target === "mapa"){
+        setTimeout(() => {
+          map.invalidateSize();
+        }, 300);
+      }
+    })
+  );
+
+  // Datos tiendas con maquillaje certificado
+  const stores = [
+    {
+      name: "Tienda Belleza Quito",
+      coords: [-0.180653, -78.467838],
+      price: "$25 - $50",
+      skinTypes: ["seca", "mixta"],
+      address: "Av. Amazonas 1234, Quito",
+    },
+    {
+      name: "Makeup Store Guayaquil",
+      coords: [-2.189412, -79.889069],
+      price: "$20 - $45",
+      skinTypes: ["grasa", "mixta"],
+      address: "Malecón 100, Guayaquil",
+    },
+    {
+      name: "Cosméticos La Bella",
+      coords: [-1.831239, -78.183406],
+      price: "$15 - $40",
+      skinTypes: ["seca", "grasa", "mixta"],
+      address: "Calle 10, Cuenca",
+    },
+  ];
+
+  // Inicializar mapa centrado en Ecuador
+  const map = L.map("map").setView([-1.5, -78.5], 6);
+
+  L.tileLayer("https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png", {
+    maxZoom: 18,
+    attribution:
+      '© <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors',
+  }).addTo(map);
+
+  let markers = [];
+
+  function updateStores(filterSkin) {
+    // Limpiar marcadores previos
+    markers.forEach((m) => map.removeLayer(m));
+    markers = [];
+
+    const filteredStores =
+      filterSkin && filterSkin !== "all"
+        ? stores.filter((store) => store.skinTypes.includes(filterSkin))
+        : stores;
+
+    // Actualizar lista de tiendas HTML
+    const listDiv = document.getElementById("storesList");
+    listDiv.innerHTML = "";
+
+    filteredStores.forEach((store) => {
+      const marker = L.marker(store.coords).addTo(map);
+      marker.bindPopup(
+        `<b>${store.name}</b><br>${store.address}<br>Precio: ${store.price}<br>Tipo de piel: ${store.skinTypes.join(", ")}`
+      );
+      markers.push(marker);
+
+      const div = document.createElement("div");
+      div.className = "store-card";
+      div.innerHTML = `<div class="store-name">${store.name}</div>
+        <div class="store-info">${store.address}</div>
+        <div class="store-info">Precio: ${store.price}</div>
+        <div class="store-info">Tipo de piel: ${store.skinTypes.join(", ")}</div>`;
+      listDiv.appendChild(div);
+    });
+
+    if(filteredStores.length > 0){
+      map.setView(filteredStores[0].coords, 12);
+    }
+  }
+
+  // Mostrar todas las tiendas al iniciar
+  updateStores("all");
+
+  // Evento para filtrar por tipo de piel
+  document.getElementById("skinType").addEventListener("change", (e) => {
+    updateStores(e.target.value);
+  });
+</script>
 </body>
 </html>
