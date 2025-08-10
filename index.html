@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Evita Daños en la Piel</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f6e6f8;
+            color: #4a235a;
+            margin: 0;
+            padding: 0;
+        }
+        header {
+            background-color: #c39bd3;
+            text-align: center;
+            padding: 20px;
+            font-size: 1.5em;
+            font-weight: bold;
+        }
+        section {
+            padding: 20px;
+        }
+        h2 {
+            border-bottom: 2px solid #9b59b6;
+            padding-bottom: 5px;
+        }
+        ul {
+            list-style: none;
+            padding: 0;
+        }
+        li {
+            background: white;
+            padding: 10px;
+            margin: 8px 0;
+            border-radius: 8px;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+        }
+        a {
+            text-decoration: none;
+            color: #4a235a;
+            font-weight: bold;
+        }
+        .recomendacion {
+            background-color: #e8daef;
+            padding: 10px;
+            margin: 5px 0;
+            border-radius: 8px;
+        }
+        select {
+            padding: 8px;
+            margin-top: 10px;
+            border-radius: 5px;
+            border: 1px solid #9b59b6;
+        }
+    </style>
+</head>
+<body>
+
+<header>💄 Evita Daños en la Piel - Maquillaje Certificado</header>
+
+<section>
+    <h2>🎥 Videos Informativos de Dermatólogos</h2>
+    <ul id="videos-informativos"></ul>
+</section>
+
+<section>
+    <h2>📢 Testimonios Reales</h2>
+    <ul id="testimonios"></ul>
+</section>
+
+<section>
+    <h2>💡 Tips de Maquillaje</h2>
+    <ul id="tips"></ul>
+</section>
+
+<section>
+    <h2>🌸 Recomendaciones según tu tipo de piel</h2>
+    <label for="tipoPiel">Selecciona tu tipo de piel:</label>
+    <select id="tipoPiel">
+        <option value="">-- Selecciona --</option>
+        <option value="seca">Piel Seca</option>
+        <option value="grasa">Piel Grasa</option>
+        <option value="mixta">Piel Mixta</option>
+    </select>
+    <div id="recomendaciones"></div>
+</section>
+
+<script>
+    const videosInformativos = [
+        { titulo: "Consejos de dermatólogo", url: "https://youtu.be/example1" },
+        { titulo: "Riesgos del maquillaje no certificado", url: "https://youtu.be/example2" }
+    ];
+
+    const testimonios = [
+        { titulo: "Mi experiencia con maquillaje certificado", url: "https://youtu.be/example3" },
+        { titulo: "Problemas por maquillaje sin certificación", url: "https://youtu.be/example4" }
+    ];
+
+    const tips = [
+        { titulo: "Cómo desmaquillarte correctamente", url: "https://youtu.be/example5" },
+        { titulo: "Tips para maquillaje duradero", url: "https://youtu.be/example6" }
+    ];
+
+    const recomendaciones = {
+        seca: [
+            { producto: "Base Hidratante X", precio: "$25" },
+            { producto: "Labial Hidratante Y", precio: "$10" }
+        ],
+        grasa: [
+            { producto: "Base Oil-Free Z", precio: "$30" },
+            { producto: "Polvo Matificante W", precio: "$15" }
+        ],
+        mixta: [
+            { producto: "BB Cream Balance A", precio: "$28" },
+            { producto: "Rubor Natural B", precio: "$12" }
+        ]
+    };
+
+    function cargarLista(id, datos) {
+        const contenedor = document.getElementById(id);
+        datos.forEach(item => {
+            const li = document.createElement("li");
+            li.innerHTML = `<a href="${item.url}" target="_blank">${item.titulo}</a>`;
+            contenedor.appendChild(li);
+        });
+    }
+
+    cargarLista("videos-informativos", videosInformativos);
+    cargarLista("testimonios", testimonios);
+    cargarLista("tips", tips);
+
+    document.getElementById("tipoPiel").addEventListener("change", function() {
+        const tipo = this.value;
+        const contenedor = document.getElementById("recomendaciones");
+        contenedor.innerHTML = "";
+        if (tipo && recomendaciones[tipo]) {
+            recomendaciones[tipo].forEach(r => {
+                const div = document.createElement("div");
+                div.classList.add("recomendacion");
+                div.innerHTML = `${r.producto} - <strong>${r.precio}</strong>`;
+                contenedor.appendChild(div);
+            });
+        }
+    });
+</script>
+
+</body>
+</html>
