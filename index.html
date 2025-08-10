@@ -7,143 +7,112 @@
     <style>
         body {
             font-family: Arial, sans-serif;
-            background-color: #f6e6f8;
-            color: #4a235a;
+            background-color: #f3e5f5; /* morado pastel */
             margin: 0;
             padding: 0;
         }
         header {
-            background-color: #c39bd3;
+            background-color: #ce93d8;
+            color: white;
+            padding: 1rem;
             text-align: center;
-            padding: 20px;
-            font-size: 1.5em;
-            font-weight: bold;
+        }
+        nav {
+            background-color: #ba68c8;
+            display: flex;
+            justify-content: center;
+            gap: 1rem;
+            padding: 0.5rem;
+        }
+        nav button {
+            background-color: #ab47bc;
+            color: white;
+            border: none;
+            padding: 0.5rem 1rem;
+            cursor: pointer;
+            border-radius: 5px;
+        }
+        nav button:hover {
+            background-color: #8e24aa;
         }
         section {
-            padding: 20px;
+            display: none;
+            padding: 2rem;
         }
-        h2 {
-            border-bottom: 2px solid #9b59b6;
-            padding-bottom: 5px;
+        section.active {
+            display: block;
         }
-        ul {
-            list-style: none;
-            padding: 0;
+        iframe {
+            width: 100%;
+            height: 315px;
+            border: none;
+            margin-bottom: 1rem;
         }
-        li {
-            background: white;
-            padding: 10px;
-            margin: 8px 0;
-            border-radius: 8px;
-            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
-        }
-        a {
-            text-decoration: none;
-            color: #4a235a;
-            font-weight: bold;
-        }
-        .recomendacion {
-            background-color: #e8daef;
-            padding: 10px;
-            margin: 5px 0;
-            border-radius: 8px;
-        }
-        select {
-            padding: 8px;
-            margin-top: 10px;
-            border-radius: 5px;
-            border: 1px solid #9b59b6;
+        .card {
+            background-color: white;
+            padding: 1rem;
+            margin: 1rem 0;
+            border-radius: 10px;
         }
     </style>
 </head>
 <body>
 
-<header>💄 Evita Daños en la Piel - Maquillaje Certificado</header>
+<header>
+    <h1>Evita Daños en la Piel</h1>
+    <p>Usa siempre maquillaje certificado</p>
+</header>
 
-<section>
-    <h2>🎥 Videos Informativos de Dermatólogos</h2>
-    <ul id="videos-informativos"></ul>
+<nav>
+    <button onclick="showSection('informativos')">Videos Informativos</button>
+    <button onclick="showSection('testimonios')">Testimonios</button>
+    <button onclick="showSection('tips')">Tips de Maquillaje</button>
+    <button onclick="showSection('recomendaciones')">Recomendaciones</button>
+</nav>
+
+<!-- Sección Videos Informativos -->
+<section id="informativos" class="active">
+    <h2>Videos Informativos de Dermatólogos</h2>
+    <iframe src="https://www.youtube.com/embed/TU_CODIGO_VIDEO_1" allowfullscreen></iframe>
+    <iframe src="https://www.youtube.com/embed/TU_CODIGO_VIDEO_2" allowfullscreen></iframe>
 </section>
 
-<section>
-    <h2>📢 Testimonios Reales</h2>
-    <ul id="testimonios"></ul>
+<!-- Sección Testimonios -->
+<section id="testimonios">
+    <h2>Testimonios Reales</h2>
+    <iframe src="https://www.youtube.com/embed/TU_CODIGO_VIDEO_3" allowfullscreen></iframe>
+    <iframe src="https://www.youtube.com/embed/TU_CODIGO_VIDEO_4" allowfullscreen></iframe>
 </section>
 
-<section>
-    <h2>💡 Tips de Maquillaje</h2>
-    <ul id="tips"></ul>
+<!-- Sección Tips -->
+<section id="tips">
+    <h2>Tips de Maquillaje</h2>
+    <iframe src="https://www.youtube.com/embed/TU_CODIGO_VIDEO_5" allowfullscreen></iframe>
+    <iframe src="https://www.youtube.com/embed/TU_CODIGO_VIDEO_6" allowfullscreen></iframe>
 </section>
 
-<section>
-    <h2>🌸 Recomendaciones según tu tipo de piel</h2>
-    <label for="tipoPiel">Selecciona tu tipo de piel:</label>
-    <select id="tipoPiel">
-        <option value="">-- Selecciona --</option>
-        <option value="seca">Piel Seca</option>
-        <option value="grasa">Piel Grasa</option>
-        <option value="mixta">Piel Mixta</option>
-    </select>
-    <div id="recomendaciones"></div>
+<!-- Sección Recomendaciones -->
+<section id="recomendaciones">
+    <h2>Recomendaciones según tu tipo de piel</h2>
+    <div class="card">
+        <h3>Piel Seca</h3>
+        <p>Base hidratante - $25</p>
+    </div>
+    <div class="card">
+        <h3>Piel Grasa</h3>
+        <p>Base oil-free - $30</p>
+    </div>
+    <div class="card">
+        <h3>Piel Mixta</h3>
+        <p>Base equilibrante - $28</p>
+    </div>
 </section>
 
 <script>
-    const videosInformativos = [
-        { titulo: "Consejos de dermatólogo", url: "https://youtu.be/example1" },
-        { titulo: "Riesgos del maquillaje no certificado", url: "https://youtu.be/example2" }
-    ];
-
-    const testimonios = [
-        { titulo: "Mi experiencia con maquillaje certificado", url: "https://youtu.be/example3" },
-        { titulo: "Problemas por maquillaje sin certificación", url: "https://youtu.be/example4" }
-    ];
-
-    const tips = [
-        { titulo: "Cómo desmaquillarte correctamente", url: "https://youtu.be/example5" },
-        { titulo: "Tips para maquillaje duradero", url: "https://youtu.be/example6" }
-    ];
-
-    const recomendaciones = {
-        seca: [
-            { producto: "Base Hidratante X", precio: "$25" },
-            { producto: "Labial Hidratante Y", precio: "$10" }
-        ],
-        grasa: [
-            { producto: "Base Oil-Free Z", precio: "$30" },
-            { producto: "Polvo Matificante W", precio: "$15" }
-        ],
-        mixta: [
-            { producto: "BB Cream Balance A", precio: "$28" },
-            { producto: "Rubor Natural B", precio: "$12" }
-        ]
-    };
-
-    function cargarLista(id, datos) {
-        const contenedor = document.getElementById(id);
-        datos.forEach(item => {
-            const li = document.createElement("li");
-            li.innerHTML = `<a href="${item.url}" target="_blank">${item.titulo}</a>`;
-            contenedor.appendChild(li);
-        });
+    function showSection(id) {
+        document.querySelectorAll('section').forEach(sec => sec.classList.remove('active'));
+        document.getElementById(id).classList.add('active');
     }
-
-    cargarLista("videos-informativos", videosInformativos);
-    cargarLista("testimonios", testimonios);
-    cargarLista("tips", tips);
-
-    document.getElementById("tipoPiel").addEventListener("change", function() {
-        const tipo = this.value;
-        const contenedor = document.getElementById("recomendaciones");
-        contenedor.innerHTML = "";
-        if (tipo && recomendaciones[tipo]) {
-            recomendaciones[tipo].forEach(r => {
-                const div = document.createElement("div");
-                div.classList.add("recomendacion");
-                div.innerHTML = `${r.producto} - <strong>${r.precio}</strong>`;
-                contenedor.appendChild(div);
-            });
-        }
-    });
 </script>
 
 </body>
