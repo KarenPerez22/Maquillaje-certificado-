@@ -1,351 +1,346 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-<meta charset="UTF-8" />
-<meta name="viewport" content="width=device-width, initial-scale=1" />
-<title>Maquillaje Certificado - Cuida tu piel</title>
-<!-- Leaflet CSS para mapa -->
-<link
-  rel="stylesheet"
-  href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"
-  integrity="sha256-sA+Gr3JbZjG2Pgr+6rQ3q+v2nC4/HJbNW3LcP3r7o3w="
-  crossorigin=""
-/>
-<style>
-  body {
-    margin: 0;
-    font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
-    background: #d4f0ef; /* turquesa pastel claro */
-    color: #0d474d;
-    line-height: 1.5;
-  }
-  header {
-    background: #57c4bc;
-    color: white;
-    padding: 1rem;
-    text-align: center;
-  }
-  nav {
-    background: #43b6af;
-    display: flex;
-    justify-content: center;
-    gap: 1rem;
-    padding: 0.5rem;
-    flex-wrap: wrap;
-  }
-  nav button {
-    background: #3aa79a;
-    border: none;
-    padding: 0.6rem 1.2rem;
-    border-radius: 6px;
-    color: white;
-    cursor: pointer;
-    font-weight: 600;
-    transition: background-color 0.3s ease;
-  }
-  nav button:hover,
-  nav button.active {
-    background: #2a7a74;
-  }
-  main {
-    padding: 1rem 1.5rem;
-    max-width: 900px;
-    margin: auto;
-  }
-  section {
-    display: none;
-  }
-  section.active {
-    display: block;
-  }
-  h2 {
-    border-bottom: 2px solid #3aa79a;
-    padding-bottom: 0.3rem;
-    margin-bottom: 1rem;
-  }
-  .testimonial, .dermatologist, .tip {
-    background: white;
-    border-radius: 10px;
-    padding: 1rem 1.2rem;
-    margin-bottom: 1rem;
-    box-shadow: 0 2px 5px rgba(26, 133, 128, 0.3);
-  }
-  .testimonial h3, .dermatologist h3, .tip h3 {
-    color: #1b534f;
-    margin-bottom: 0.3rem;
-  }
-  .testimonial p, .dermatologist p, .tip p {
-    font-size: 0.95rem;
-    color: #2f5c5a;
-  }
-  ul.tips-list {
-    list-style-type: disc;
-    margin-left: 1.5rem;
-  }
-  ul.tips-list li {
-    margin-bottom: 0.6rem;
-  }
-  #map {
-    height: 400px;
-    border-radius: 12px;
-    margin-top: 1rem;
-  }
-  .store-card {
-    background: white;
-    margin: 0.8rem 0;
-    padding: 1rem;
-    border-radius: 10px;
-    box-shadow: 0 3px 6px rgba(26, 133, 128, 0.3);
-  }
-  .store-name {
-    font-weight: 700;
-    font-size: 1.1rem;
-    margin-bottom: 0.2rem;
-    color: #0d474d;
-  }
-  .store-info {
-    font-size: 0.9rem;
-    color: #1a8580;
-  }
-  .filter-group {
-    margin-bottom: 1rem;
-  }
-  select {
-    padding: 0.5rem;
-    border-radius: 6px;
-    border: 1px solid #3aa79a;
-    font-size: 1rem;
-  }
-</style>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Belleza Consciente: Maquillaje Certificado para Ti</title>
+    <!-- Incluimos Tailwind CSS para un diseño moderno y responsivo.
+         Es un framework de CSS que nos permite diseñar rápidamente usando clases predefinidas. -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        /* Estilos personalizados para un toque extra y para KaTeX si fuera necesario.
+           Aquí definimos la fuente principal para darle una apariencia más agradable. */
+        body {
+            font-family: 'Inter', sans-serif; /* Usamos la fuente Inter para un look limpio */
+        }
+        /* Personalizamos el scroll suave para una mejor experiencia de navegación */
+        html {
+            scroll-behavior: smooth;
+        }
+        /* Agregamos una animación sutil para las tarjetas al cargar */
+        .fade-in {
+            animation: fadeIn 1s ease-out;
+        }
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        /* Estilo para el contenedor del mapa para asegurar que se vea bien */
+        .map-container iframe {
+            width: 100%;
+            height: 400px;
+            border-radius: 1rem; /* Bordes redondeados para el iframe del mapa */
+        }
+    </style>
+    <!-- Incluimos Font Awesome para iconos bonitos y fáciles de usar -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <!-- Cargamos la fuente Inter de Google Fonts para darle un estilo consistente -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&display=swap" rel="stylesheet">
 </head>
-<body>
+<body class="bg-blue-50 text-gray-800">
 
-<header>
-  <h1>Cuida tu piel con maquillaje certificado</h1>
-  <p>Información, consejos y tiendas cercanas para un maquillaje seguro</p>
-</header>
+    <!-- Sección de Encabezado (Header): La parte superior de nuestra página -->
+    <header class="bg-gradient-to-r from-teal-200 to-blue-200 shadow-md py-4 px-6 fixed w-full z-10 top-0">
+        <nav class="container mx-auto flex justify-between items-center">
+            <!-- Logotipo de la página -->
+            <a href="#" class="text-2xl font-bold text-teal-800 flex items-center">
+                <i class="fas fa-leaf mr-2 text-teal-600"></i> Belleza Consciente
+            </a>
+            <!-- Menú de navegación -->
+            <ul class="flex space-x-6">
+                <li><a href="#testimonios" class="text-teal-700 hover:text-teal-900 font-semibold transition duration-300">Testimonios</a></li>
+                <li><a href="#dermatologos" class="text-teal-700 hover:text-teal-900 font-semibold transition duration-300">Dermatólogos</a></li>
+                <li><a href="#tips" class="text-teal-700 hover:text-teal-900 font-semibold transition duration-300">Tips de Maquillaje</a></li>
+                <li><a href="#tiendas" class="text-teal-700 hover:text-teal-900 font-semibold transition duration-300">Tiendas Cercanas</a></li>
+            </ul>
+        </nav>
+    </header>
 
-<nav>
-  <button class="active" data-section="testimonios">Testimonios Reales</button>
-  <button data-section="dermatologos">Recomendaciones de Dermatólogos</button>
-  <button data-section="tips">Tips de Maquillaje</button>
-  <button data-section="mapa">Tiendas Cercanas</button>
-</nav>
+    <!-- Sección Principal (Hero Section): La primera impresión de nuestra página -->
+    <section class="bg-gradient-to-br from-blue-100 to-teal-100 min-h-screen flex items-center justify-center pt-20">
+        <div class="container mx-auto text-center p-8 rounded-xl shadow-lg bg-white bg-opacity-80">
+            <h1 class="text-5xl font-extrabold text-teal-700 mb-4 animate-pulse">Descubre la Belleza que Cuida</h1>
+            <p class="text-xl text-gray-700 mb-8 max-w-2xl mx-auto">
+                Tu guía esencial para un maquillaje que no solo realza tu belleza, sino que también respeta tu piel y el planeta. ¡Explora el mundo del maquillaje certificado!
+            </p>
+            <a href="#tips" class="bg-teal-500 hover:bg-teal-600 text-white font-bold py-3 px-8 rounded-full shadow-lg transform transition duration-300 hover:scale-105">
+                Empieza a Explorar <i class="fas fa-arrow-down ml-2"></i>
+            </a>
+        </div>
+    </section>
 
-<main>
-  <!-- Sección Testimonios -->
-  <section id="testimonios" class="active">
-    <h2>Testimonios Reales</h2>
-    <article class="testimonial">
-      <h3>María, 28 años - Quito</h3>
-      <p>
-        “Antes usaba maquillaje sin saber si estaba certificado y tuve una reacción alérgica grave. Desde que cambio a productos certificados, mi piel mejoró muchísimo y no tengo más irritaciones.”
-      </p>
-    </article>
-    <article class="testimonial">
-      <h3>Lucía, 35 años - Guayaquil</h3>
-      <p>
-        “Aprendí que comprar maquillaje certificado protege mi salud y evita daños en la piel a largo plazo. Además, la calidad es mucho mejor y dura más tiempo.”
-      </p>
-    </article>
-    <article class="testimonial">
-      <h3>Verónica, 24 años - Cuenca</h3>
-      <p>
-        “Los testimonios de dermatólogos me convencieron de dejar de usar marcas no certificadas. Mi piel sensible ahora está protegida y me siento más segura.”
-      </p>
-    </article>
-  </section>
+    <!-- Sección de Testimonios Reales: La voz de nuestras usuarias -->
+    <section id="testimonios" class="py-16 bg-blue-50">
+        <div class="container mx-auto px-6">
+            <h2 class="text-4xl font-bold text-center text-teal-700 mb-12">Historias Reales, Piel Radiante</h2>
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                <!-- Testimonio 1 -->
+                <div class="bg-white p-8 rounded-xl shadow-md border-t-4 border-teal-400 transform transition duration-300 hover:scale-105 fade-in">
+                    <p class="text-lg text-gray-700 italic mb-4">"Desde que uso maquillaje certificado, mi piel grasa ha mejorado muchísimo. Menos brotes y una sensación de ligereza increíble. ¡No vuelvo atrás!"</p>
+                    <p class="font-semibold text-teal-600">- Sofía G., 28 años</p>
+                </div>
+                <!-- Testimonio 2 -->
+                <div class="bg-white p-8 rounded-xl shadow-md border-t-4 border-teal-400 transform transition duration-300 hover:scale-105 fade-in">
+                    <p class="text-lg text-gray-700 italic mb-4">"Siempre tuve miedo de maquillarme por mi piel sensible. Con las marcas certificadas, por fin puedo lucir un look hermoso sin irritaciones. ¡Una maravilla!"</p>
+                    <p class="font-semibold text-teal-600">- Valeria M., 35 años</p>
+                </div>
+                <!-- Testimonio 3 -->
+                <div class="bg-white p-8 rounded-xl shadow-md border-t-4 border-teal-400 transform transition duration-300 hover:scale-105 fade-in">
+                    <p class="text-lg text-gray-700 italic mb-4">"El cambio en la textura y el brillo de mi piel es notorio. Es genial saber que uso productos que son buenos para mí y para el medio ambiente."</p>
+                    <p class="font-semibold text-teal-600">- Camila R., 22 años</p>
+                </div>
+            </div>
+        </div>
+    </section>
 
-  <!-- Sección Dermatólogos -->
-  <section id="dermatologos">
-    <h2>Recomendaciones de Dermatólogos</h2>
-    <article class="dermatologist">
-      <h3>Dra. Andrea Paredes</h3>
-      <p>
-        “Es fundamental usar maquillaje con certificación sanitaria porque garantiza que los ingredientes son seguros, reducen el riesgo de alergias y previenen daños a la barrera cutánea.”
-      </p>
-    </article>
-    <article class="dermatologist">
-      <h3>Dr. Carlos Vega</h3>
-      <p>
-        “Los productos no certificados pueden contener sustancias tóxicas o contaminantes. Recomiendo siempre verificar el sello de certificación y optar por marcas reconocidas.”
-      </p>
-    </article>
-    <article class="dermatologist">
-      <h3>Dra. Mariana Solís</h3>
-      <p>
-        “Especialmente para pieles sensibles o con problemas dermatológicos, es vital usar maquillaje que respete el pH de la piel y tenga ingredientes hipoalergénicos certificados.”
-      </p>
-    </article>
-  </section>
+    <!-- Sección de Recomendaciones de Dermatólogos: Voz de la ciencia -->
+    <section id="dermatologos" class="py-16 bg-gradient-to-br from-blue-100 to-teal-100">
+        <div class="container mx-auto px-6">
+            <h2 class="text-4xl font-bold text-center text-teal-700 mb-12">La Ciencia del Cuidado de la Piel: Recomendaciones Dermatólogicas</h2>
+            <div class="bg-white p-8 rounded-xl shadow-lg border-l-4 border-blue-400">
+                <h3 class="text-2xl font-semibold text-teal-600 mb-4">"Elige Inteligentemente, Cuida Profundamente"</h3>
+                <p class="text-lg text-gray-700 mb-4">
+                    Los dermatólogos enfatizan la importancia de la elección de productos para la piel. El maquillaje certificado, al estar formulado con ingredientes más puros y menos irritantes, reduce significativamente el riesgo de reacciones alérgicas, brotes de acné y sensibilidad.
+                </p>
+                <ul class="list-disc list-inside text-lg text-gray-700 space-y-2">
+                    <li>**Prioriza lo Hipoalergénico:** Busca sellos que garanticen productos minimizados en alérgenos comunes.</li>
+                    <li>**Ingredientes Naturales y Orgánicos:** Favorecen la compatibilidad con la piel y reducen la carga química.</li>
+                    <li>**No Comedogénico:** Esencial para pieles propensas al acné, ya que no obstruye los poros.</li>
+                    <li>**Protección Solar Integrada:** Aunque el maquillaje no reemplaza tu protector solar, un factor SPF añadido es un plus.</li>
+                    <li>**Limpieza Rigurosa:** No importa cuán "limpio" sea tu maquillaje, desmaquillarte completamente es el paso más crucial para la salud de tu piel.</li>
+                </ul>
+                <p class="text-md text-gray-600 mt-6 italic">
+                    *Nota: Esta sección ofrece recomendaciones generales y no sustituye la consulta personalizada con un dermatólogo.*
+                </p>
+            </div>
+        </div>
+    </section>
 
-  <!-- Sección Tips -->
-  <section id="tips">
-    <h2>Tips de Maquillaje</h2>
-    <ul class="tips-list">
-      <li>Limpia tus brochas y esponjas regularmente para evitar acumulación de bacterias.</li>
-      <li>Elige productos con ingredientes naturales y certificados para minimizar riesgos.</li>
-      <li>Usa protector solar antes de aplicar maquillaje para proteger tu piel de rayos UV.</li>
-      <li>Haz pruebas de parche con nuevos productos antes de aplicarlos en todo el rostro.</li>
-      <li>Retira el maquillaje completamente antes de dormir para evitar obstrucción de poros.</li>
-      <li>Evita compartir maquillaje para prevenir infecciones.</li>
-      <li>Consulta siempre con un dermatólogo si tienes dudas sobre qué productos usar.</li>
-    </ul>
-  </section>
+    <!-- Sección de Tips de Maquillaje: Consejos y Secretos de Belleza -->
+    <section id="tips" class="py-16 bg-blue-50">
+        <div class="container mx-auto px-6">
+            <h2 class="text-4xl font-bold text-center text-teal-700 mb-12">Deslumbra con Consciente: Tips de Maquillaje Certificado</h2>
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                <!-- Tip 1 -->
+                <div class="bg-white p-6 rounded-xl shadow-md border-r-4 border-pink-300 transform transition duration-300 hover:scale-105 fade-in">
+                    <h3 class="text-xl font-semibold text-teal-600 mb-3"><i class="fas fa-lightbulb mr-2 text-yellow-500"></i> Prepara tu Lienzo</h3>
+                    <p class="text-gray-700">Limpia, tonifica e hidrata tu piel antes de cada aplicación. Una piel bien preparada es la clave para que el maquillaje certificado se asiente mejor y dure más.</p>
+                </div>
+                <!-- Tip 2 -->
+                <div class="bg-white p-6 rounded-xl shadow-md border-r-4 border-pink-300 transform transition duration-300 hover:scale-105 fade-in">
+                    <h3 class="text-xl font-semibold text-teal-600 mb-3"><i class="fas fa-brush mr-2 text-pink-500"></i> Menos es Más</h3>
+                    <p class="text-gray-700">Los productos certificados suelen tener una pigmentación excelente. Empieza con poca cantidad y construye la cobertura deseada. Así evitarás la sensación de pesadez.</p>
+                </div>
+                <!-- Tip 3 -->
+                <div class="bg-white p-6 rounded-xl shadow-md border-r-4 border-pink-300 transform transition duration-300 hover:scale-105 fade-in">
+                    <h3 class="text-xl font-semibold text-teal-600 mb-3"><i class="fas fa-recycle mr-2 text-green-500"></i> Chequea las Etiquetas</h3>
+                    <p class="text-gray-700">Familiarízate con los sellos de certificación (COSMOS Organic, Ecocert, USDA Organic, Leaping Bunny). Garantizan que los ingredientes son de origen responsable.</p>
+                </div>
+                <!-- Tip 4 -->
+                <div class="bg-white p-6 rounded-xl shadow-md border-r-4 border-pink-300 transform transition duration-300 hover:scale-105 fade-in">
+                    <h3 class="text-xl font-semibold text-teal-600 mb-3"><i class="fas fa-palette mr-2 text-purple-500"></i> Colores Naturales</h3>
+                    <p class="text-gray-700">Explora la gama de colores inspirados en la naturaleza. Los tonos tierra, rosados suaves y cobres realzan tu belleza de forma sutil y elegante.</p>
+                </div>
+                <!-- Tip 5 -->
+                <div class="bg-white p-6 rounded-xl shadow-md border-r-4 border-pink-300 transform transition duration-300 hover:scale-105 fade-in">
+                    <h3 class="text-xl font-semibold text-teal-600 mb-3"><i class="fas fa-sun mr-2 text-orange-400"></i> Protección Solar</h3>
+                    <p class="text-gray-700">Aunque uses bases con SPF, siempre aplica protector solar antes. Es tu mejor aliado contra el envejecimiento prematuro y las manchas.</p>
+                </div>
+                <!-- Tip 6 -->
+                <div class="bg-white p-6 rounded-xl shadow-md border-r-4 border-pink-300 transform transition duration-300 hover:scale-105 fade-in">
+                    <h3 class="text-xl font-semibold text-teal-600 mb-3"><i class="fas fa-moon mr-2 text-blue-500"></i> Desmaquíllate Siempre</h3>
+                    <p class="text-gray-700">La limpieza nocturna es innegociable. Usa desmaquillantes certificados para retirar todo el producto y permitir que tu piel se regenere durante la noche.</p>
+                </div>
+            </div>
+        </div>
+    </section>
 
-  <!-- Sección Mapa -->
-  <section id="mapa">
-    <h2>Tiendas con Maquillaje Certificado Cerca de Ti</h2>
+    <!-- Sección de Tiendas Cercanas: Un mapa simulado y búsqueda de productos -->
+    <section id="tiendas" class="py-16 bg-gradient-to-br from-teal-100 to-blue-100">
+        <div class="container mx-auto px-6">
+            <h2 class="text-4xl font-bold text-center text-teal-700 mb-12">Encuentra Tu Belleza Certificada Cerca de Ti</h2>
 
-    <div class="filter-group">
-      <label for="skinType">Filtra por tipo de piel: </label>
-      <select id="skinType">
-        <option value="all">Todos</option>
-        <option value="seca">Piel Seca</option>
-        <option value="grasa">Piel Grasa</option>
-        <option value="mixta">Piel Mixta</option>
-      </select>
-    </div>
+            <!-- Contenedor del mapa (simulado con un iframe de Google Maps) -->
+            <div class="map-container bg-white p-4 rounded-xl shadow-lg mb-8">
+                <p class="text-lg text-gray-700 mb-4 text-center">
+                    ¡Explora dónde puedes encontrar productos de maquillaje certificado!
+                </p>
+                <!-- Iframe de Google Maps: Esto es un mapa estático de ejemplo.
+                     Para una funcionalidad real de "tiendas cercanas" necesitarías una API de Google Maps
+                     y un backend para buscar y mostrar resultados dinámicamente. -->
+                <iframe
+                    src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3782.972304892465!2d-78.48202278453535!3d-0.20780449980967067!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x902972986f0a1e3b%3A0xb3c3e2f9d5e3f4e1!2sQuito%2C%20Ecuador!5e0!3m2!1ses!2s!4v1678912345678!5m2!1ses!2s"
+                    allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade" class="rounded-lg">
+                </iframe>
+                <p class="text-sm text-gray-600 mt-4 text-center">
+                    *El mapa es un ejemplo. La funcionalidad de búsqueda de tiendas reales requiere una integración con APIs y una base de datos de ubicaciones.
+                </p>
+            </div>
 
-    <div id="map"></div>
+            <!-- Formulario de búsqueda (simulado) -->
+            <div class="bg-white p-8 rounded-xl shadow-lg mb-8">
+                <h3 class="text-2xl font-semibold text-teal-600 mb-4">Busca Marcas y Tiendas</h3>
+                <div class="flex flex-col md:flex-row gap-4 mb-6">
+                    <input type="text" id="searchInput" placeholder="Escribe el nombre de un producto o tipo de piel (ej. labial, piel seca)..."
+                        class="flex-grow p-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-teal-400">
+                    <button id="searchButton"
+                        class="bg-teal-500 hover:bg-teal-600 text-white font-bold py-3 px-6 rounded-lg shadow-md transition duration-300 transform hover:scale-105">
+                        Buscar <i class="fas fa-search ml-2"></i>
+                    </button>
+                </div>
 
-    <div id="storesList"></div>
-  </section>
-</main>
+                <!-- Resultados de búsqueda (simulados) -->
+                <div id="searchResults" class="space-y-4">
+                    <p class="text-md text-gray-600 text-center">Aquí aparecerán los resultados de tu búsqueda simulada.</p>
+                    <!-- Los resultados se añadirán aquí dinámicamente con JavaScript -->
+                </div>
+                 <p class="text-sm text-gray-600 mt-4 text-center">
+                    *Esta búsqueda es una simulación con datos de ejemplo. La compatibilidad con el tipo de piel y los precios reales variarían.*
+                </p>
+            </div>
+        </div>
+    </section>
 
-<!-- Leaflet JS para mapa -->
-<script
-  src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"
-  integrity="sha256-o9N1j7vJ0cu8CdHIO0VNVKkG0RQja/rsR5KkPvyc9uY="
-  crossorigin=""
-></script>
+    <!-- Sección de Pie de Página (Footer): Información de contacto y derechos de autor -->
+    <footer class="bg-teal-800 text-white py-8 px-6">
+        <div class="container mx-auto text-center">
+            <p class="mb-4 text-lg">Conéctate con nosotros:</p>
+            <div class="flex justify-center space-x-6 mb-6 text-2xl">
+                <a href="#" class="hover:text-teal-300 transition duration-300"><i class="fab fa-instagram"></i></a>
+                <a href="#" class="hover:text-teal-300 transition duration-300"><i class="fab fa-facebook-f"></i></a>
+                <a href="#" class="hover:text-teal-300 transition duration-300"><i class="fab fa-twitter"></i></a>
+            </div>
+            <p class="text-sm">&copy; 2024 Belleza Consciente. Todos los derechos reservados.</p>
+        </div>
+    </footer>
 
-<script>
-  // Navegación entre secciones
-  const buttons = document.querySelectorAll("nav button");
-  const sections = document.querySelectorAll("main section");
+    <!-- Script JavaScript para la interactividad -->
+    <script>
+        // Este bloque de JavaScript maneja la interactividad de la página.
 
-  buttons.forEach((btn) =>
-    btn.addEventListener("click", () => {
-      buttons.forEach((b) => b.classList.remove("active"));
-      btn.classList.add("active");
-      const target = btn.dataset.section;
-      sections.forEach((sec) =>
-        sec.id === target ? sec.classList.add("active") : sec.classList.remove("active")
-      );
-      if(target === "mapa"){
-        setTimeout(() => {
-          map.invalidateSize();
-        }, 300);
-      }
-    })
-  );
+        // Obtenemos los elementos del DOM con los que vamos a interactuar.
+        const searchInput = document.getElementById('searchInput');
+        const searchButton = document.getElementById('searchButton');
+        const searchResults = document.getElementById('searchResults');
 
-  // Datos tiendas con maquillaje certificado
-  const stores = [
-    {
-      name: "Tienda Belleza Quito",
-      coords: [-0.180653, -78.467838],
-      price: "$25 - $50",
-      skinTypes: ["seca", "mixta"],
-      address: "Av. Amazonas 1234, Quito",
-      description: "Amplia variedad de bases hidratantes y productos para piel seca y mixta.",
-    },
-    {
-      name: "Makeup Store Guayaquil",
-      coords: [-2.189412, -79.889069],
-      price: "$20 - $45",
-      skinTypes: ["grasa", "mixta"],
-      address: "Malecón 100, Guayaquil",
-      description: "Especialistas en maquillaje para piel grasa con fórmulas no comedogénicas.",
-    },
-    {
-      name: "Cosméticos La Bella",
-      coords: [-1.831239, -78.183406],
-      price: "$15 - $40",
-      skinTypes: ["seca", "grasa", "mixta"],
-      address: "Calle 10, Cuenca",
-      description: "Productos certificados para todo tipo de piel, con atención personalizada.",
-    },
-    {
-      name: "Salón y Tienda Glamour",
-      coords: [-0.203216, -78.491098],
-      price: "$30 - $60",
-      skinTypes: ["seca", "sensible"],
-      address: "Av. Colón 250, Quito",
-      description: "Cosméticos certificados para piel sensible y seca, con asesoría experta.",
-    },
-    {
-      name: "Estética Natural",
-      coords: [-2.147123, -79.900543],
-      price: "$18 - $35",
-      skinTypes: ["grasa", "mixta"],
-      address: "Calle Las Monjas 120, Guayaquil",
-      description: "Opciones orgánicas y certificadas para piel grasa y mixta.",
-    },
-  ];
+        // Datos de ejemplo para las tiendas y productos.
+        // En una aplicación real, estos datos vendrían de una base de datos o una API.
+        const storesData = [
+            {
+                name: "EcoBeauty Boutique",
+                address: "Calle de las Rosas 123, Centro",
+                products: [
+                    { name: "Base Natural", price: "$35", skin_type: "Seca, Normal" },
+                    { name: "Máscara de Pestañas Vegana", price: "$20", skin_type: "Todo tipo" },
+                    { name: "Labial Hidratante Orgánico", price: "$18", skin_type: "Todo tipo" }
+                ]
+            },
+            {
+                name: "Verde Glam",
+                address: "Av. Siempre Viva 456, Norte",
+                products: [
+                    { name: "Corrector Mineral", price: "$28", skin_type: "Mixta, Grasa" },
+                    { name: "Primer Iluminador Botánico", price: "$30", skin_type: "Normal, Seca" },
+                    { name: "Paleta de Sombras Ecológica", price: "$45", skin_type: "Todo tipo" }
+                ]
+            },
+            {
+                name: "Pureza Natural Cosmetics",
+                address: "Plaza del Sol 789, Sur",
+                products: [
+                    { name: "Delineador Líquido Orgánico", price: "$22", skin_type: "Todo tipo" },
+                    { name: "Blush en Crema Certificado", price: "$25", skin_type: "Seca, Normal" },
+                    { name: "Sérum Facial con Vit. C", price: "$50", skin_type: "Todo tipo" }
+                ]
+            },
+            {
+                name: "The Organic Glow Store",
+                address: "Boulevard de la Naturaleza 101, Este",
+                products: [
+                    { name: "Base Fluida Sin Siliconas", price: "$38", skin_type: "Sensible, Normal" },
+                    { name: "Polvo Translúcido de Arroz", price: "$26", skin_type: "Grasa, Mixta" },
+                    { name: "Bálsamo Labial con Tintura Natural", price: "$15", skin_type: "Todo tipo" }
+                ]
+            }
+        ];
 
-  // Inicializar mapa centrado en Ecuador
-  const map = L.map("map").setView([-1.5, -78.5], 6);
+        // Función para renderizar los resultados de la búsqueda
+        function renderSearchResults(query) {
+            // Convertimos la consulta a minúsculas para una búsqueda insensible a mayúsculas/minúsculas
+            const lowerCaseQuery = query.toLowerCase();
+            let resultsHtml = ''; // Variable para construir el HTML de los resultados
+            let foundResults = false; // Bandera para saber si encontramos algo
 
-  L.tileLayer("https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png", {
-    maxZoom: 18,
-    attribution:
-      '© <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors',
-  }).addTo(map);
+            // Iteramos sobre cada tienda en nuestros datos de ejemplo
+            storesData.forEach(store => {
+                // Filtramos los productos de cada tienda que coincidan con la búsqueda
+                const matchingProducts = store.products.filter(product =>
+                    // Buscamos si el nombre del producto O el tipo de piel coinciden con la consulta
+                    product.name.toLowerCase().includes(lowerCaseQuery) ||
+                    product.skin_type.toLowerCase().includes(lowerCaseQuery)
+                );
 
-  let markers = [];
+                // Si encontramos productos que coinciden en esta tienda
+                if (matchingProducts.length > 0) {
+                    foundResults = true; // Marcamos que hemos encontrado resultados
+                    // Agregamos el HTML para la tienda
+                    resultsHtml += `
+                        <div class="bg-gray-50 p-6 rounded-lg shadow-sm border border-gray-200">
+                            <h4 class="text-xl font-semibold text-teal-700 mb-2">${store.name}</h4>
+                            <p class="text-gray-600 mb-3"><i class="fas fa-map-marker-alt mr-2 text-blue-400"></i> ${store.address}</p>
+                            <ul class="list-disc list-inside text-gray-700 space-y-1">
+                    `;
+                    // Agregamos los productos que coinciden de esta tienda
+                    matchingProducts.forEach(product => {
+                        resultsHtml += `
+                            <li>
+                                <span class="font-medium">${product.name}</span>: ${product.price} 
+                                <span class="text-sm text-gray-500">(Apto para: ${product.skin_type})</span>
+                            </li>
+                        `;
+                    });
+                    resultsHtml += `
+                            </ul>
+                        </div>
+                    `;
+                }
+            });
 
-  function updateStores(filterSkin) {
-    // Limpiar marcadores previos
-    markers.forEach((m) => map.removeLayer(m));
-    markers = [];
+            // Si no se encontraron resultados, mostramos un mensaje
+            if (!foundResults && query !== "") { // Solo si la búsqueda no está vacía y no hay resultados
+                resultsHtml = `<p class="text-center text-gray-600">No se encontraron productos o tiendas que coincidan con tu búsqueda.</p>`;
+            } else if (query === "") { // Si la búsqueda está vacía, mostramos el mensaje inicial
+                 resultsHtml = `<p class="text-center text-gray-600">Aquí aparecerán los resultados de tu búsqueda simulada.</p>`;
+            }
 
-    const filteredStores =
-      filterSkin && filterSkin !== "all"
-        ? stores.filter((store) => store.skinTypes.includes(filterSkin))
-        : stores;
+            // Actualizamos el contenido del div de resultados
+            searchResults.innerHTML = resultsHtml;
+        }
 
-    // Actualizar lista de tiendas HTML
-    const listDiv = document.getElementById("storesList");
-    listDiv.innerHTML = "";
+        // Agregamos un 'event listener' al botón de búsqueda para que se active cuando se hace clic
+        searchButton.addEventListener('click', () => {
+            const query = searchInput.value.trim(); // Obtenemos el texto del input, eliminando espacios extra
+            renderSearchResults(query); // Llamamos a la función para mostrar los resultados
+        });
 
-    filteredStores.forEach((store) => {
-      const marker = L.marker(store.coords).addTo(map);
-      marker.bindPopup(
-        `<b>${store.name}</b><br>${store.address}<br>Precio: ${store.price}<br>Tipo de piel: ${store.skinTypes.join(", ")}<br><i>${store.description}</i>`
-      );
-      markers.push(marker);
+        // Opcional: Permitir buscar al presionar "Enter" en el input
+        searchInput.addEventListener('keypress', (event) => {
+            if (event.key === 'Enter') {
+                searchButton.click(); // Simula un clic en el botón de búsqueda
+            }
+        });
 
-      const div = document.createElement("div");
-      div.className = "store-card";
-      div.innerHTML = `<div class="store-name">${store.name}</div>
-        <div class="store-info">${store.address}</div>
-        <div class="store-info"><strong>Precio:</strong> ${store.price}</div>
-        <div class="store-info"><strong>Tipo de piel:</strong> ${store.skinTypes.join(", ")}</div>
-        <div class="store-info"><em>${store.description}</em></div>`;
-      listDiv.appendChild(div);
-    });
+        // Al cargar la página, aseguramos que las tarjetas aparezcan con la animación
+        window.addEventListener('load', () => {
+            const cards = document.querySelectorAll('.fade-in');
+            cards.forEach((card, index) => {
+                // Retrasamos la animación para que aparezcan escalonadamente
+                card.style.animationDelay = `${index * 0.1}s`;
+                card.classList.add('opacity-100'); // Hacemos visible el elemento después del retraso
+            });
+        });
 
-    if (filteredStores.length > 0) {
-      // Centrar mapa en el promedio de las ubicaciones filtradas
-      const latSum = filteredStores.reduce((sum, s) => sum + s.coords[0], 0);
-      const lngSum = filteredStores.reduce((sum, s) => sum + s.coords[1], 0);
-      const center = [latSum / filteredStores.length, lngSum / filteredStores.length];
-      map.setView(center, 10);
-    } else {
-      // Si no hay tiendas filtradas, volver a vista general
-      map.setView([-1.5, -78.5], 6);
-    }
-  }
-
-  // Mostrar todas las tiendas al iniciar
-  updateStores("all");
-
-  // Evento para filtrar por tipo de piel
-  document.getElementById("skinType").addEventListener("change", (e) => {
-    updateStores(e.target.value);
-  });
-</script>
+    </script>
 </body>
 </html>
+
