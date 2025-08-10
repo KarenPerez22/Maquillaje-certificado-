@@ -3,13 +3,13 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title> PielAutentica: Maquillaje Certificado para Ti</title>
+    <title>PielAutentica: Maquillaje Certificado para Ti</title>
     <!-- Incluimos Tailwind CSS para un diseño moderno y responsivo.
          Es un framework de CSS que nos permite diseñar rápidamente usando clases predefinidas. -->
     <script src="https://cdn.tailwindcss.com"></script>
     <style>
-        /* Estilos personalizados para un toque extra y para KaTeX si fuera necesario.
-           Aquí definimos la fuente principal para darle una apariencia más agradable. */
+        /* Estilos personalizados para un toque extra y para la fuente principal.
+           Aquí definimos la fuente 'Inter' para darle una apariencia más agradable. */
         body {
             font-family: 'Inter', sans-serif; /* Usamos la fuente Inter para un look limpio */
         }
@@ -37,122 +37,138 @@
     <!-- Cargamos la fuente Inter de Google Fonts para darle un estilo consistente -->
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&display=swap" rel="stylesheet">
 </head>
-<body class="bg-blue-50 text-gray-800">
+<!-- El color de fondo principal de la página ahora es un rosa muy claro (rose-50) -->
+<body class="bg-rose-50 text-gray-800">
 
     <!-- Sección de Encabezado (Header): La parte superior de nuestra página -->
-    <header class="bg-gradient-to-r from-teal-200 to-blue-200 shadow-md py-4 px-6 fixed w-full z-10 top-0">
+    <!-- El fondo del header es un gradiente de rosa a un naranja muy suave, evocando el terracota pastel -->
+    <header class="bg-gradient-to-r from-rose-200 to-orange-100 shadow-md py-4 px-6 fixed w-full z-10 top-0">
         <nav class="container mx-auto flex justify-between items-center">
-            <!-- Logotipo de la página -->
-            <a href="#" class="text-2xl font-bold text-teal-800 flex items-center">
-                <i class="fas fa-leaf mr-2 text-teal-600"></i> PielAutentica
+            <!-- Logotipo de la página: Texto en un tono rosa más oscuro -->
+            <a href="#" class="text-2xl font-bold text-rose-800 flex items-center">
+                <!-- Icono de hoja en un tono rosa más vibrante -->
+                <i class="fas fa-leaf mr-2 text-rose-600"></i> PielAutentica
             </a>
-            <!-- Menú de navegación -->
+            <!-- Menú de navegación: Links en tonos de rosa -->
             <ul class="flex space-x-6">
-                <li><a href="#testimonios" class="text-teal-700 hover:text-teal-900 font-semibold transition duration-300">Testimonios</a></li>
-                <li><a href="#dermatologos" class="text-teal-700 hover:text-teal-900 font-semibold transition duration-300">Dermatólogos</a></li>
-                <li><a href="#tips" class="text-teal-700 hover:text-teal-900 font-semibold transition duration-300">Tips de Maquillaje</a></li>
-                <li><a href="#tiendas" class="text-teal-700 hover:text-teal-900 font-semibold transition duration-300">Tiendas Cercanas</a></li>
+                <li><a href="#testimonios" class="text-rose-700 hover:text-rose-900 font-semibold transition duration-300">Testimonios</a></li>
+                <li><a href="#dermatologos" class="text-rose-700 hover:text-rose-900 font-semibold transition duration-300">Dermatólogos</a></li>
+                <li><a href="#tips" class="text-rose-700 hover:text-rose-900 font-semibold transition duration-300">Tips de Maquillaje</a></li>
+                <li><a href="#tiendas" class="text-rose-700 hover:text-rose-900 font-semibold transition duration-300">Tiendas Cercanas</a></li>
             </ul>
         </nav>
     </header>
 
     <!-- Sección Principal (Hero Section): La primera impresión de nuestra página -->
-    <section class="bg-gradient-to-br from-blue-100 to-teal-100 min-h-screen flex items-center justify-center pt-20">
+    <!-- El fondo es un gradiente de rosa claro a un durazno muy suave, para el terracota pastel -->
+    <section class="bg-gradient-to-br from-rose-100 to-orange-50 min-h-screen flex items-center justify-center pt-20">
         <div class="container mx-auto text-center p-8 rounded-xl shadow-lg bg-white bg-opacity-80">
-            <h1 class="text-5xl font-extrabold text-teal-700 mb-4 animate-pulse">Descubre la Belleza que Cuida</h1>
+            <!-- Título principal en un tono rosa más oscuro -->
+            <h1 class="text-5xl font-extrabold text-rose-700 mb-4 animate-pulse">Descubre la Belleza que Cuida</h1>
             <p class="text-xl text-gray-700 mb-8 max-w-2xl mx-auto">
                 Tu guía esencial para un maquillaje que no solo realza tu belleza, sino que también respeta tu piel y el planeta. ¡Explora el mundo del maquillaje certificado!
             </p>
-            <a href="#tips" class="bg-teal-500 hover:bg-teal-600 text-white font-bold py-3 px-8 rounded-full shadow-lg transform transition duration-300 hover:scale-105">
+            <!-- Botón de acción principal en un tono rosa pastel -->
+            <a href="#tips" class="bg-rose-500 hover:bg-rose-600 text-white font-bold py-3 px-8 rounded-full shadow-lg transform transition duration-300 hover:scale-105">
                 Empieza a Explorar <i class="fas fa-arrow-down ml-2"></i>
             </a>
         </div>
     </section>
 
     <!-- Sección de Testimonios Reales: La voz de nuestras usuarias -->
-    <section id="testimonios" class="py-16 bg-blue-50">
+    <!-- Fondo en rosa muy claro, consistente con el body -->
+    <section id="testimonios" class="py-16 bg-rose-50">
         <div class="container mx-auto px-6">
-            <h2 class="text-4xl font-bold text-center text-teal-700 mb-12">Historias Reales, Piel Radiante</h2>
+            <!-- Título de la sección en rosa oscuro -->
+            <h2 class="text-4xl font-bold text-center text-rose-700 mb-12">Historias Reales, Piel Radiante</h2>
             <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-                <!-- Testimonio 1 -->
-                <div class="bg-white p-8 rounded-xl shadow-md border-t-4 border-teal-400 transform transition duration-300 hover:scale-105 fade-in">
+                <!-- Tarjetas de Testimonios: Borde superior en un tono rosa más vibrante -->
+                <div class="bg-white p-8 rounded-xl shadow-md border-t-4 border-rose-400 transform transition duration-300 hover:scale-105 fade-in">
                     <p class="text-lg text-gray-700 italic mb-4">"Desde que uso maquillaje certificado, mi piel grasa ha mejorado muchísimo. Menos brotes y una sensación de ligereza increíble. ¡No vuelvo atrás!"</p>
-                    <p class="font-semibold text-teal-600">- Sofía G., 28 años</p>
+                    <!-- Nombre del testimonio en un tono rosa más suave -->
+                    <p class="font-semibold text-rose-600">- Sofía G., 28 años</p>
                 </div>
                 <!-- Testimonio 2 -->
-                <div class="bg-white p-8 rounded-xl shadow-md border-t-4 border-teal-400 transform transition duration-300 hover:scale-105 fade-in">
+                <div class="bg-white p-8 rounded-xl shadow-md border-t-4 border-rose-400 transform transition duration-300 hover:scale-105 fade-in">
                     <p class="text-lg text-gray-700 italic mb-4">"Siempre tuve miedo de maquillarme por mi piel sensible. Con las marcas certificadas, por fin puedo lucir un look hermoso sin irritaciones. ¡Una maravilla!"</p>
-                    <p class="font-semibold text-teal-600">- Valeria M., 35 años</p>
+                    <p class="font-semibold text-rose-600">- Valeria M., 35 años</p>
                 </div>
                 <!-- Testimonio 3 -->
-                <div class="bg-white p-8 rounded-xl shadow-md border-t-4 border-teal-400 transform transition duration-300 hover:scale-105 fade-in">
+                <div class="bg-white p-8 rounded-xl shadow-md border-t-4 border-rose-400 transform transition duration-300 hover:scale-105 fade-in">
                     <p class="text-lg text-gray-700 italic mb-4">"El cambio en la textura y el brillo de mi piel es notorio. Es genial saber que uso productos que son buenos para mí y para el medio ambiente."</p>
-                    <p class="font-semibold text-teal-600">- Camila R., 22 años</p>
+                    <p class="font-semibold text-rose-600">- Camila R., 22 años</p>
                 </div>
             </div>
         </div>
     </section>
 
     <!-- Sección de Recomendaciones de Dermatólogos: Voz de la ciencia -->
-    <section id="dermatologos" class="py-16 bg-gradient-to-br from-blue-100 to-teal-100">
+    <!-- Fondo con gradiente de rosa claro a durazno suave -->
+    <section id="dermatologos" class="py-16 bg-gradient-to-br from-rose-100 to-orange-100">
         <div class="container mx-auto px-6">
-            <h2 class="text-4xl font-bold text-center text-teal-700 mb-12">La Ciencia del Cuidado de la Piel: Recomendaciones Dermatólogicas por la Dra. Lorena Villa </h2>
-            <div class="bg-white p-8 rounded-xl shadow-lg border-l-4 border-blue-400">
-                <h3 class="text-2xl font-semibold text-teal-600 mb-4">"Elige Inteligentemente, Cuida Profundamente"</h3>
+            <!-- Título de la sección en rosa oscuro -->
+            <h2 class="text-4xl font-bold text-center text-rose-700 mb-12">Cuidado de la Piel: Recomendaciones Dermatólogicas por la Dra. Lorena Villa</h2>
+            <!-- Contenedor del texto con un borde izquierdo en tono terracota suave -->
+            <div class="bg-white p-8 rounded-xl shadow-lg border-l-4 border-orange-300">
+                <!-- Subtítulo en tono rosa más suave -->
+                <h3 class="text-2xl font-semibold text-rose-600 mb-4">"Elige Inteligentemente, Cuida Profundamente"</h3>
                 <p class="text-lg text-gray-700 mb-4">
-                    Seguridad y Control Sanitario es importante enfatizar que los productos cosméticos certificados garantizan que han pasado por rigurosos controles de calidad y seguridad. Esto asegura que los ingredientes sean seguros para la piel y que el producto no cause reacciones adversas. 
+                    Los dermatólogos enfatizan la importancia de la elección de productos para la piel. El maquillaje certificado, al estar formulado con ingredientes más puros y menos irritantes, reduce significativamente el riesgo de reacciones alérgicas, brotes de acné y sensibilidad.
                 </p>
                 <ul class="list-disc list-inside text-lg text-gray-700 space-y-2">
                     <li>🧴 Adecuación a Tipos de Piel Específicos
-Los productos certificados suelen estar formulados para adaptarse a diferentes tipos de piel, como seca, grasa, mixta o sensible. Esto es crucial, ya que cada tipo de piel tiene necesidades particulares. Por ejemplo, productos con ácido salicílico son recomendados para pieles con tendencia al acné</li>
+Los productos certificados suelen estar formulados para adaptarse a diferentes tipos de piel, como seca, grasa, mixta o sensible. Esto es crucial, ya que cada tipo de piel tiene necesidades particulares.</li>
                     <li>🌱 Ingredientes de Calidad y Transparencia
-Los cosméticos certificados en Ecuador deben cumplir con normativas que aseguran la calidad de sus ingredientes. Esto incluye la transparencia en la etiqueta, donde se especifican los componentes y su concentración.</li>
+Los cosméticos certificados en Ecuador deben cumplir con normativas que aseguran la calidad de sus ingredientes. Esto incluye la transparencia en la etiqueta, donde se especifican los componentes y su concentración</li>
                     <li>🛡️ Prevención de Enfermedades Dermatológicas
-El uso de productos no certificados puede aumentar el riesgo de desarrollar enfermedades dermatológicas, como dermatitis, alergias o incluso cáncer de piel, muchos cosméticos no regulados pueden contener sustancias nocivas que dañan la barrera cutánea y alteran el equilibrio de la piel.</li>
+El uso de productos no certificados puede aumentar el riesgo de desarrollar enfermedades dermatológicas, como dermatitis, alergias o incluso cáncer de piel.</li>
                     <li>🧑‍⚕️ Asesoramiento Profesional
 Es recomendable consultar a un dermatólogo certificado antes de elegir productos cosméticos, especialmente si se tienen condiciones específicas de la piel. </li>
-                    <li> "Para mantener una piel saludable y evitar complicaciones dermatológicas, es fundamental elegir maquillaje confiable y aprobado por las autoridades sanitarias correspondientes."</li>
+                    <li> Es recomendable usar exclusivamente productos de maquillaje que cuenten con certificación sanitaria oficial. Esto asegura que los productos han sido evaluados y cumplen con estrictos estándares de calidad y seguridad. </li>
                 </ul>
                 <p class="text-md text-gray-600 mt-6 italic">
-                    *Agenda tu cita: https://lorenavilla.com.ec/dermatologia-cuenca/*
+                    *Agenda tu cita:https://lorenavilla.com.ec/dermatologia-cuenca/.*
                 </p>
             </div>
         </div>
     </section>
 
     <!-- Sección de Tips de Maquillaje: Consejos y Secretos de Belleza -->
-    <section id="tips" class="py-16 bg-blue-50">
+    <!-- Fondo en rosa muy claro, consistente con el body -->
+    <section id="tips" class="py-16 bg-rose-50">
         <div class="container mx-auto px-6">
-            <h2 class="text-4xl font-bold text-center text-teal-700 mb-12">Deslumbra con Consciente: Tips de Maquillaje Certificado</h2>
+            <!-- Título de la sección en rosa oscuro -->
+            <h2 class="text-4xl font-bold text-center text-rose-700 mb-12">Deslumbra con Consciente: Tips de Maquillaje Certificado</h2>
             <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-                <!-- Tip 1 -->
-                <div class="bg-white p-6 rounded-xl shadow-md border-r-4 border-pink-300 transform transition duration-300 hover:scale-105 fade-in">
-                    <h3 class="text-xl font-semibold text-teal-600 mb-3"><i class="fas fa-lightbulb mr-2 text-yellow-500"></i> Prepara tu Lienzo</h3>
+                <!-- Tarjetas de Tips: Borde derecho en un tono terracota suave -->
+                <div class="bg-white p-6 rounded-xl shadow-md border-r-4 border-orange-300 transform transition duration-300 hover:scale-105 fade-in">
+                    <!-- Subtítulo en tono rosa más suave -->
+                    <h3 class="text-xl font-semibold text-rose-600 mb-3"><i class="fas fa-lightbulb mr-2 text-yellow-500"></i> Prepara tu Lienzo</h3>
                     <p class="text-gray-700">Limpia, tonifica e hidrata tu piel antes de cada aplicación. Una piel bien preparada es la clave para que el maquillaje certificado se asiente mejor y dure más.</p>
                 </div>
                 <!-- Tip 2 -->
-                <div class="bg-white p-6 rounded-xl shadow-md border-r-4 border-pink-300 transform transition duration-300 hover:scale-105 fade-in">
-                    <h3 class="text-xl font-semibold text-teal-600 mb-3"><i class="fas fa-brush mr-2 text-pink-500"></i> Menos es Más</h3>
+                <div class="bg-white p-6 rounded-xl shadow-md border-r-4 border-orange-300 transform transition duration-300 hover:scale-105 fade-in">
+                    <h3 class="text-xl font-semibold text-rose-600 mb-3"><i class="fas fa-brush mr-2 text-pink-500"></i> Menos es Más</h3>
                     <p class="text-gray-700">Los productos certificados suelen tener una pigmentación excelente. Empieza con poca cantidad y construye la cobertura deseada. Así evitarás la sensación de pesadez.</p>
                 </div>
                 <!-- Tip 3 -->
-                <div class="bg-white p-6 rounded-xl shadow-md border-r-4 border-pink-300 transform transition duration-300 hover:scale-105 fade-in">
-                    <h3 class="text-xl font-semibold text-teal-600 mb-3"><i class="fas fa-recycle mr-2 text-green-500"></i> Chequea las Etiquetas</h3>
+                <div class="bg-white p-6 rounded-xl shadow-md border-r-4 border-orange-300 transform transition duration-300 hover:scale-105 fade-in">
+                    <h3 class="text-xl font-semibold text-rose-600 mb-3"><i class="fas fa-recycle mr-2 text-green-500"></i> Chequea las Etiquetas</h3>
                     <p class="text-gray-700">Familiarízate con los sellos de certificación (COSMOS Organic, Ecocert, USDA Organic, Leaping Bunny). Garantizan que los ingredientes son de origen responsable.</p>
                 </div>
                 <!-- Tip 4 -->
-                <div class="bg-white p-6 rounded-xl shadow-md border-r-4 border-pink-300 transform transition duration-300 hover:scale-105 fade-in">
-                    <h3 class="text-xl font-semibold text-teal-600 mb-3"><i class="fas fa-palette mr-2 text-purple-500"></i> Colores Naturales</h3>
+                <div class="bg-white p-6 rounded-xl shadow-md border-r-4 border-orange-300 transform transition duration-300 hover:scale-105 fade-in">
+                    <h3 class="text-xl font-semibold text-rose-600 mb-3"><i class="fas fa-palette mr-2 text-purple-500"></i> Colores Naturales</h3>
                     <p class="text-gray-700">Explora la gama de colores inspirados en la naturaleza. Los tonos tierra, rosados suaves y cobres realzan tu belleza de forma sutil y elegante.</p>
                 </div>
                 <!-- Tip 5 -->
-                <div class="bg-white p-6 rounded-xl shadow-md border-r-4 border-pink-300 transform transition duration-300 hover:scale-105 fade-in">
-                    <h3 class="text-xl font-semibold text-teal-600 mb-3"><i class="fas fa-sun mr-2 text-orange-400"></i> Protección Solar</h3>
+                <div class="bg-white p-6 rounded-xl shadow-md border-r-4 border-orange-300 transform transition duration-300 hover:scale-105 fade-in">
+                    <h3 class="text-xl font-semibold text-rose-600 mb-3"><i class="fas fa-sun mr-2 text-orange-400"></i> Protección Solar</h3>
                     <p class="text-gray-700">Aunque uses bases con SPF, siempre aplica protector solar antes. Es tu mejor aliado contra el envejecimiento prematuro y las manchas.</p>
                 </div>
                 <!-- Tip 6 -->
-                <div class="bg-white p-6 rounded-xl shadow-md border-r-4 border-pink-300 transform transition duration-300 hover:scale-105 fade-in">
-                    <h3 class="text-xl font-semibold text-teal-600 mb-3"><i class="fas fa-moon mr-2 text-blue-500"></i> Desmaquíllate Siempre</h3>
+                <div class="bg-white p-6 rounded-xl shadow-md border-r-4 border-orange-300 transform transition duration-300 hover:scale-105 fade-in">
+                    <h3 class="text-xl font-semibold text-rose-600 mb-3"><i class="fas fa-moon mr-2 text-blue-500"></i> Desmaquíllate Siempre</h3>
                     <p class="text-gray-700">La limpieza nocturna es innegociable. Usa desmaquillantes certificados para retirar todo el producto y permitir que tu piel se regenere durante la noche.</p>
                 </div>
             </div>
@@ -160,9 +176,11 @@ Es recomendable consultar a un dermatólogo certificado antes de elegir producto
     </section>
 
     <!-- Sección de Tiendas Cercanas: Un mapa simulado y búsqueda de productos -->
-    <section id="tiendas" class="py-16 bg-gradient-to-br from-teal-100 to-blue-100">
+    <!-- Fondo con gradiente de terracota suave a rosa claro -->
+    <section id="tiendas" class="py-16 bg-gradient-to-br from-orange-100 to-rose-100">
         <div class="container mx-auto px-6">
-            <h2 class="text-4xl font-bold text-center text-teal-700 mb-12">Encuentra Tu Belleza Certificada Cerca de Ti</h2>
+            <!-- Título de la sección en rosa oscuro -->
+            <h2 class="text-4xl font-bold text-center text-rose-700 mb-12">Encuentra Tu Belleza Certificada Cerca de Ti</h2>
 
             <!-- Contenedor del mapa (simulado con un iframe de Google Maps) -->
             <div class="map-container bg-white p-4 rounded-xl shadow-lg mb-8">
@@ -183,12 +201,15 @@ Es recomendable consultar a un dermatólogo certificado antes de elegir producto
 
             <!-- Formulario de búsqueda (simulado) -->
             <div class="bg-white p-8 rounded-xl shadow-lg mb-8">
-                <h3 class="text-2xl font-semibold text-teal-600 mb-4">Busca Marcas y Tiendas</h3>
+                <!-- Título del formulario en rosa oscuro -->
+                <h3 class="text-2xl font-semibold text-rose-600 mb-4">Busca Marcas y Tiendas</h3>
                 <div class="flex flex-col md:flex-row gap-4 mb-6">
                     <input type="text" id="searchInput" placeholder="Escribe el nombre de un producto o tipo de piel (ej. labial, piel seca)..."
-                        class="flex-grow p-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-teal-400">
+                        <!-- Borde del input en rosa, focus ring en tono terracota -->
+                        class="flex-grow p-3 border border-rose-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-orange-400">
+                    <!-- Botón de búsqueda en rosa pastel -->
                     <button id="searchButton"
-                        class="bg-teal-500 hover:bg-teal-600 text-white font-bold py-3 px-6 rounded-lg shadow-md transition duration-300 transform hover:scale-105">
+                        class="bg-rose-500 hover:bg-rose-600 text-white font-bold py-3 px-6 rounded-lg shadow-md transition duration-300 transform hover:scale-105">
                         Buscar <i class="fas fa-search ml-2"></i>
                     </button>
                 </div>
@@ -206,13 +227,15 @@ Es recomendable consultar a un dermatólogo certificado antes de elegir producto
     </section>
 
     <!-- Sección de Pie de Página (Footer): Información de contacto y derechos de autor -->
-    <footer class="bg-teal-800 text-white py-8 px-6">
+    <!-- Fondo del footer en un tono rosa profundo -->
+    <footer class="bg-rose-800 text-white py-8 px-6">
         <div class="container mx-auto text-center">
             <p class="mb-4 text-lg">Conéctate con nosotros:</p>
             <div class="flex justify-center space-x-6 mb-6 text-2xl">
-                <a href="#" class="hover:text-teal-300 transition duration-300"><i class="fab fa-instagram"></i></a>
-                <a href="#" class="hover:text-teal-300 transition duration-300"><i class="fab fa-facebook-f"></i></a>
-                <a href="#" class="hover:text-teal-300 transition duration-300"><i class="fab fa-twitter"></i></a>
+                <!-- Iconos de redes sociales en un rosa más claro al pasar el ratón -->
+                <a href="#" class="hover:text-rose-200 transition duration-300"><i class="fab fa-instagram"></i></a>
+                <a href="#" class="hover:text-rose-200 transition duration-300"><i class="fab fa-facebook-f"></i></a>
+                <a href="#" class="hover:text-rose-200 transition duration-300"><i class="fab fa-twitter"></i></a>
             </div>
             <p class="text-sm">&copy; 2024 PielAutentica. Todos los derechos reservados.</p>
         </div>
@@ -290,8 +313,8 @@ Es recomendable consultar a un dermatólogo certificado antes de elegir producto
                     // Agregamos el HTML para la tienda
                     resultsHtml += `
                         <div class="bg-gray-50 p-6 rounded-lg shadow-sm border border-gray-200">
-                            <h4 class="text-xl font-semibold text-teal-700 mb-2">${store.name}</h4>
-                            <p class="text-gray-600 mb-3"><i class="fas fa-map-marker-alt mr-2 text-blue-400"></i> ${store.address}</p>
+                            <h4 class="text-xl font-semibold text-rose-700 mb-2">${store.name}</h4>
+                            <p class="text-gray-600 mb-3"><i class="fas fa-map-marker-alt mr-2 text-orange-400"></i> ${store.address}</p>
                             <ul class="list-disc list-inside text-gray-700 space-y-1">
                     `;
                     // Agregamos los productos que coinciden de esta tienda
@@ -347,4 +370,3 @@ Es recomendable consultar a un dermatólogo certificado antes de elegir producto
     </script>
 </body>
 </html>
-
